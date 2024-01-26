@@ -1,0 +1,55 @@
+.header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.navigate > ul {
+    list-style: none;
+    display: flex;
+    gap: 55px;
+}
+
+.navigate > ul > li >a {
+    text-decoration: none;
+    color: black;
+}
+
+.navigate {
+    margin-left: 5%;
+}
+
+.auth {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+}
+
+.log {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.reg {
+    gap: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+    height: 36px;
+    background-color: #fff;
+    border: 2px solid #0BD366;
+    border-radius: 20px;
+    color: #0BD366;
+}
+
+@media screen and (max-width: 1000px) {
+    .navigate {
+        display: none;
+    }
+    .auth {
+        display: none;
+    }
+    
+}
