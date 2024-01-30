@@ -1,10 +1,10 @@
 import React from "react";
-import {Header} from "./Components/header/Header.tsx";
+import { Home } from "./Components/home/home.tsx";
 
 export const Application: React.FC = () => {
     return (
         <>
-            <Header />
+            <Home />
         </>
     );
 };

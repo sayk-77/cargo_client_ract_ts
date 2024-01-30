@@ -1,0 +1,82 @@
+.banner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 10px 100px 10px;
+}
+
+.banner_text > h1{
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+}
+
+.banner_text {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}
+
+.title_company_name {
+    font-family: "Josefin Sans";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #0CC861;
+}
+
+.banner_text > p {
+    color: #5A5A5A;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+}
+
+.order {
+    border-radius: 20px;
+    background: #0BD366;
+    display: flex;
+    width: 200px;
+    height: 54px;
+    border: none;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.banner > img {
+    max-width: 100%;
+    height: auto;
+    object-fit: scale-down;
+}
+
+@media screen and (max-width: 1000px) {
+    .banner {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .banner_text {
+        align-items: center;
+    }
+
+    .banner_text > h1 {
+        font-size: 36px;
+    }
+    
+    .title_company_name {
+        font-size: 36px;
+    }
+
+    .banner > img {
+        padding-bottom: 50px;
+    }
+}
