@@ -50,12 +50,17 @@
     align-items: center;
     gap: 10px;
     color: #fff;
+    cursor: pointer;
+}
+
+.order:hover {
+    background-color: #3ada82;
+    transition: .3s;
 }
 
 .banner > img {
     max-width: 100%;
     height: auto;
-    object-fit: scale-down;
 }
 
 @media screen and (max-width: 1000px) {

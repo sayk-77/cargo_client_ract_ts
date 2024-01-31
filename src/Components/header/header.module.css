@@ -18,6 +18,11 @@
     color: black;
 }
 
+.navigate > ul > li > a:hover {
+    color: #0BD366;
+    transition: .3s;
+}
+
 .navigate {
     margin-left: 5%;
 }
@@ -34,6 +39,11 @@
     cursor: pointer;
 }
 
+.log:hover {
+    color: #0BD366;
+    transition: .3s;
+}
+
 .reg {
     gap: 10px;
     padding: 5px 15px;
@@ -43,6 +53,12 @@
     border: 2px solid #0BD366;
     border-radius: 20px;
     color: #0BD366;
+}
+
+.reg:hover {
+    color: #fff;
+    background-color: #0BD366;
+    transition: .5s;
 }
 
 @media screen and (max-width: 1000px) {

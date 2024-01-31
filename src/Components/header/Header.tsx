@@ -3,23 +3,23 @@ import React from 'react'
 import styles from './header.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
-import { Example } from './Burger'
+import { BurgerMenu } from './Burger'
 
 export const Header: React.FC = () => {
     return (
         <>
             <header className={styles.header}>
                 <div className={styles.logo}>
-                    <svg height={30} width={130}><use xlinkHref={sprite+'#logo'}></use></svg>
+                    <a href=""><svg height={30} width={130}><use xlinkHref={sprite+'#logo'}></use></svg></a>
                 </div>
                 <div className={styles.navigate}>
                     <ul>
-                        <li>О нас</li>
-                        <li>Контакты</li>
-                        <li>Задать вопрос</li>
+                        <li><a href="">О нас</a></li>
+                        <li><a href="">Контакты</a></li>
+                        <li><a href="">Задать вопрос</a></li>
                     </ul>
                 </div>
-                <Example />
+                <BurgerMenu />
                 <div className={styles.auth}>
                     <button className={styles.log}>Войти</button>
                     <button className={styles.reg}>Регистрация</button>

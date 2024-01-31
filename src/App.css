@@ -6,5 +6,23 @@
     padding: 0;
     font-family: 'Rubik', sans-serif;
     font-size: 16px;
+    color: #2B2B2B;
 }
 
+body {
+    margin: 0;
+    overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #abefca;
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #fff;
+}

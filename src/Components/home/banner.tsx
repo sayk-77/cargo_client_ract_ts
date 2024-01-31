@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import styles from './banner.module.css';
+import styles from './banner.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 
