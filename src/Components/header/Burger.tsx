@@ -4,6 +4,7 @@ import { push as Menu } from 'react-burger-menu'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 import './burger.css'
+import { Link } from 'react-router-dom'
 
 interface ExampleProps {}
 
@@ -15,22 +16,22 @@ export class BurgerMenu extends React.Component<ExampleProps> {
   render() {
     return (
       <Menu right width={ 300 } customBurgerIcon={ <svg height={45} width={45}><use xlinkHref={sprite+'#burger'}></use></svg> }>
-        <a href=""><svg height={30} width={130}><use xlinkHref={sprite+'#logo'}></use></svg></a>
-        <a id="log" className="menu-item" href="/">
+        <Link to="/"><svg height={30} width={130}><use xlinkHref={sprite+'#logo'}></use></svg></Link>
+        <Link id="/log" className="menu-item" to="/authorization" >
           Войти
-        </a>
-        <a id="reg" className="menu-item" href="/about">
+        </Link>
+        <Link id="/reg" className="menu-item" to="/registration">
           Регистрация
-        </a>
-        <a id="about" className="menu-item" href="/contact">
+        </Link>
+        <Link id="/about" className="menu-item" to="/about">
           О нас
-        </a>
-        <a id="contact" className="menu-item" href="/contact">
+        </Link>
+        <Link id="/contact" className="menu-item" to="/contacts">
           Контакты
-        </a>
-        <a id="quest" className="menu-item" href="/contact">
+        </Link>
+        <Link id="/quest" className="menu-item" to="/ask-question">
           Задать вопрос
-        </a>
+        </Link>
       </Menu>
     );
   }

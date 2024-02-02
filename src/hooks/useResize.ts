@@ -10,8 +10,6 @@ export const useResize = () => {
     if (textarea) {
       let animationFrameId: number;
 
-      console.log('Resize script is running');
-
       const adjustTextareaHeight = () => {
         textarea.style.height = 'auto';
         const newHeight = `${textarea.scrollHeight}px`;

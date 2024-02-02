@@ -31,12 +31,14 @@
     display: flex;
     gap: 30px;
     margin-left: auto;
+    align-items: center;
 }
 
 .log {
     border: none;
     background: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .log:hover {
@@ -53,6 +55,7 @@
     border: 2px solid #0BD366;
     border-radius: 20px;
     color: #0BD366;
+    text-decoration: none;
 }
 
 .reg:hover {
