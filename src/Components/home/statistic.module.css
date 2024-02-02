@@ -9,6 +9,12 @@
     background: #FFF;
     box-shadow: 7px 13px 35px 0px rgba(0, 0, 0, 0.09);
     position: relative;
+    transition: .5s;
+}
+
+.statistic:hover {
+    transform: scale(1.5);
+    transition: .5s;
 }
 
 .statistic_item {
@@ -67,6 +73,9 @@
     }
     .statistic_item_text > p {
         font-size: 20px;
+    }
+    .statistic:hover {
+        transform: none;
     }
 }
 

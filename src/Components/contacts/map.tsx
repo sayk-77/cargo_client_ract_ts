@@ -1,7 +1,7 @@
 import React from 'react'
 // @ts-ignore
 import styles from './map.module.css'
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import { YMaps, Map, Placemark} from '@pbe/react-yandex-maps';
 
 export const MapContact:React.FC = () => {
     const defaultState = {
@@ -16,7 +16,7 @@ export const MapContact:React.FC = () => {
         <YMaps>
             <div className={styles.map_container}>
                 <Map defaultState={defaultState} width="100%" height="450px" >
-                    <Placemark geometry={[58.555774, 31.259360]} color="green" options={{iconColor: "#0BD366"}}/>
+                    <Placemark geometry={[58.555774, 31.259360]} options={{iconColor: "#0BD366"}}/>
                 </Map>
             </div>
         </YMaps>
