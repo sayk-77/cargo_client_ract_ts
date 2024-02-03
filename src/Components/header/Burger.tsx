@@ -17,10 +17,10 @@ export class BurgerMenu extends React.Component<ExampleProps> {
     return (
       <Menu right width={ 300 } customBurgerIcon={ <svg height={45} width={45}><use xlinkHref={sprite+'#burger'}></use></svg> }>
         <Link to="/"><svg height={30} width={130}><use xlinkHref={sprite+'#logo'}></use></svg></Link>
-        <Link id="/log" className="menu-item" to="/authorization" >
+        <Link id="/authorization" className="menu-item" to="/authorization" >
           Войти
         </Link>
-        <Link id="/reg" className="menu-item" to="/registration">
+        <Link id="/registration" className="menu-item" to="/registration">
           Регистрация
         </Link>
         <Link id="/about" className="menu-item" to="/about">
