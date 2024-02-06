@@ -1,0 +1,52 @@
+{
+  "hash": "6c6f5be2",
+  "configHash": "c03e799c",
+  "lockfileHash": "8e4c45ce",
+  "browserHash": "c6f02777",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "5be8849f",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "1d1783ff",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "54f4d8c0",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "43ba98b5",
+      "needsInterop": false
+    },
+    "@pbe/react-yandex-maps": {
+      "src": "../../node_modules/@pbe/react-yandex-maps/dist/react-yandex-maps.esm.js",
+      "file": "@pbe_react-yandex-maps.js",
+      "fileHash": "ddeec17b",
+      "needsInterop": false
+    },
+    "react-burger-menu": {
+      "src": "../../node_modules/react-burger-menu/lib/BurgerMenu.js",
+      "file": "react-burger-menu.js",
+      "fileHash": "16c8940a",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-UWZXFKA6": {
+      "file": "chunk-UWZXFKA6.js"
+    },
+    "chunk-UPDK7Z2H": {
+      "file": "chunk-UPDK7Z2H.js"
+    }
+  }
+}

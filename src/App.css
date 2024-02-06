@@ -26,3 +26,13 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
     background-color: #fff;
 }
+
+input {
+    outline: none;
+    transition: .2s;
+}
+
+input:focus {
+    border-color: #0bd366;
+    transition: .2s;
+}
