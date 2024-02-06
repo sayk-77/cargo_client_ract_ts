@@ -14,6 +14,7 @@ export const Router:React.FC = () => {
         <Route path='/' element={<Home />}/>
         <Route path='/about' element={<About />} />
         <Route path='/contacts' element={<Contacts />}/>
+        <Route path='/about' element={<About />} />
         <Route path='/ask-question' element={<Question />} />
         <Route path='/authorization' element={<Authorization />} />
         <Route path='/registration' element={<Registration />} />
