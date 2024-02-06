@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 //@ts-ignore
 import styles from './registration.module.css'
 import { Link } from 'react-router-dom'
-import { searchAddress } from '../../tools/searchAddress'
+// @ts-ignore
+import sprite from '../../sprite.svg'
 
 export const Registration:React.FC = () => {
     const [firstName, setFirstName] = useState<string>("")
@@ -11,24 +12,29 @@ export const Registration:React.FC = () => {
     const [email, setEmail] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    const [searchAddresses, setSearchAdresses] = useState<string[]>([])
+    const [error, setError] = useState<string>("")
+    const [showPassword, setPasswordShow] = useState<boolean>(false)
 
+    const isValidName = (name: any) => /^[a-zA-Zа-яА-Я]+$/.test(name);
+    const isValidPassword = (password: string) => /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$/.test(password);
 
     const registration = (e: React.FormEvent<HTMLFormElement>): void => {
       e.preventDefault();
+
+      if (!isValidName(firstName) && !isValidName(lastName)) {
+        setError("Имя или фамилия содержат не допустимые символы")
+        return
+      }
+      if (!isValidPassword(password)) {
+        setError('Пароль должен содержать минимум одну цифру и состоять только из букв латинского алфавита.');
+        return;
+      }
+
+      setError("")
+
     }
 
-    const add = async (query: string) => {
-      try {
-        const data:string[] = await searchAddress(query);
-        setSearchAdresses(data)
-        console.log(data);
-        
-        
-      } catch (error) {
-        console.error('Error fetching addresses:', error);
-      }
-    };
+
 
 
     return (
@@ -64,7 +70,7 @@ export const Registration:React.FC = () => {
               name="address"
               placeholder="Введите ваш адрес"
               required
-              onChange={(e) => add(e.target.value)}
+              onChange={(e) => setAddress(e.target.value)}
             />
             <label className={styles.label} htmlFor="email">Почта:</label>
             <input
@@ -87,15 +93,21 @@ export const Registration:React.FC = () => {
               onChange={(e) => setPhone(e.target.value)}
             />
             <label className={styles.label} htmlFor="password">Пароль:</label>
-            <input
-              className={styles.input}
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Введите ваш пароль"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className={styles.password_cont}>
+              <input
+                className={styles.inputPassword}
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                placeholder="Введите ваш пароль"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div className={styles.showPassword} onClick={() => setPasswordShow(!showPassword)}>
+                <svg height={14} width={29}><use xlinkHref={showPassword? sprite+'#eye_open' : sprite+'#eye_close'}></use></svg> 
+              </div>       
+            </div>
+            {error && <div className={styles.error}>{error}</div>}
             <div className={styles.wrap}>
               <button className={styles.send} type="submit">Регистрация</button>
             </div>
