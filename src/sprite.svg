@@ -113,4 +113,9 @@
         <path d="M10 13H25M25 13L20.5 8.5M25 13L20.5 17.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M1 13C1 6.37258 6.37258 1 13 1M13 25C9.21043 25 5.83113 23.2433 3.63195 20.5" stroke="black" stroke-width="2" stroke-linecap="round" />
     </symbol>
+
+    // detail order
+    <svg width="27" height="22" viewBox="0 0 27 22" fill="none" xmlns="http://www.w3.org/2000/svg" id="detail_order">
+        <path opacity="0.6" d="M1 11H4.90625M26 11L16.625 1M26 11L16.625 21M26 11H9.59375" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
 </svg>

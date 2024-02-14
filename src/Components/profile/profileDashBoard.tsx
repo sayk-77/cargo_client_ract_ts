@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // @ts-ignore
 import styles from './profileDashBoard.module.css'
 // @ts-ignore
@@ -8,6 +8,16 @@ import { BurgerDashBoard } from './burgerDashBoard'
 
 
 export const ProfileDashBoard:React.FC = () => {
+    const [isOrdersOpen, setOrdersOpen] = useState(false);
+
+    const toggleOrders = () => {
+        setOrdersOpen(!isOrdersOpen);
+    };
+
+    const closeMenu = () => {
+        setOrdersOpen(false);
+    }
+
   return (
     <>
         <section className={styles.dashBoard}>
@@ -23,7 +33,14 @@ export const ProfileDashBoard:React.FC = () => {
                 </div>
                 <div className={styles.panel_link}>
                     <svg height={25} width={25}><use xlinkHref={sprite+'#order'}></use></svg>
-                    <Link to="/order">Заказы</Link>
+                    <span onClick={toggleOrders}>Заказы</span>
+                    {isOrdersOpen && (
+                    <div className={styles.subMenu}>
+                        <Link to="/order/new" onClick={closeMenu}>Новые</Link>
+                        <Link to="/order/process" onClick={closeMenu}>В процессе</Link>
+                        <Link to="/order/completed" onClick={closeMenu}>Завершенные</Link>
+                    </div>
+                    )}
                 </div>
                 <div className={styles.panel_link}>
                     <svg height={25} width={25}><use xlinkHref={sprite+'#setting'}></use></svg>
