@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 //@ts-ignore
 import styles from './authorization.module.css'
 import { Link } from 'react-router-dom'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 export const Authorization:React.FC = () => {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [error, setError] = useState<string>("")
 
-    const login = async (e: React.FormEvent<HTMLFormElement>) => {
+    const login = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+        setError("")
         
         const loginData = {
             email: email,
@@ -26,7 +28,7 @@ export const Authorization:React.FC = () => {
         } catch (err) {
             if (axios.isAxiosError(err)) {
                 if (err.response?.status === 401) {
-                    console.log('Неверный логин или пароль')
+                    setError(err.response.data.error)
                 } else {
                     console.log('Ошибка на сервере:', err.message)
                 }
@@ -59,6 +61,7 @@ export const Authorization:React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                {error && <div className={styles.error}>{error}</div>}
                 <div className={styles.wrap}>
                     <button className={styles.send} type="submit">Войти</button>
                 </div>

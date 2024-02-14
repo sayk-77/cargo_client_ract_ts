@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 //@ts-ignore
 import styles from './registration.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import InputMask from 'react-input-mask'
+import axios, { AxiosResponse } from 'axios'
 // @ts-ignore
 import sprite from '../../sprite.svg'
+
+const isValidName = (name: any) => /^[a-zA-Zа-яА-Я]+$/.test(name);
+const isValidPassword = (password: string) => /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$/.test(password);
 
 export const Registration:React.FC = () => {
     const [firstName, setFirstName] = useState<string>("")
@@ -15,11 +20,10 @@ export const Registration:React.FC = () => {
     const [error, setError] = useState<string>("")
     const [showPassword, setPasswordShow] = useState<boolean>(false)
 
-    const isValidName = (name: any) => /^[a-zA-Zа-яА-Я]+$/.test(name);
-    const isValidPassword = (password: string) => /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$/.test(password);
+    const nav = useNavigate()
 
-    const registration = (e: React.FormEvent<HTMLFormElement>): void => {
-      e.preventDefault();
+    const registration = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+      e.preventDefault()
 
       if (!isValidName(firstName) && !isValidName(lastName)) {
         setError("Имя или фамилия содержат не допустимые символы")
@@ -32,6 +36,23 @@ export const Registration:React.FC = () => {
 
       setError("")
 
+      const regData = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "address": address,
+        "email": email,
+        "phoneNumber": phone,
+        "password": password
+      }
+
+      try {
+        const response: AxiosResponse = await axios.post("http://192.168.0.105:5000/client/add", regData)
+        nav("/authorization")
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          setError(err.response?.data.error);
+        }
+      }
     }
 
 
@@ -50,7 +71,7 @@ export const Registration:React.FC = () => {
               name="firstname"
               placeholder="Введите ваше имя"
               required
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
             />
             <label className={styles.label} htmlFor="lastname">Фамилия:</label>
             <input
@@ -60,7 +81,7 @@ export const Registration:React.FC = () => {
               name="lastname"
               placeholder="Введите вашу фамилию"
               required
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
             />
             <label className={styles.label} htmlFor="address">Адрес:</label>
             <input
@@ -70,7 +91,7 @@ export const Registration:React.FC = () => {
               name="address"
               placeholder="Введите ваш адрес"
               required
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
             />
             <label className={styles.label} htmlFor="email">Почта:</label>
             <input
@@ -80,17 +101,15 @@ export const Registration:React.FC = () => {
               name="email"
               placeholder="Введите вашу почту"
               required
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             />
             <label className={styles.label} htmlFor="phone">Номер телефона:</label>
-            <input
+            <InputMask
               className={styles.input}
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder="Введите ваш номер телефона"
-              required
-              onChange={(e) => setPhone(e.target.value)}
+              mask="+7 (999) 999 99 99"
+              maskChar=" "
+              placeholder="+7 (---) --- -- --"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             />
             <label className={styles.label} htmlFor="password">Пароль:</label>
             <div className={styles.password_cont}>
@@ -101,10 +120,10 @@ export const Registration:React.FC = () => {
                 name="password"
                 placeholder="Введите ваш пароль"
                 required
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
               />
               <div className={styles.showPassword} onClick={() => setPasswordShow(!showPassword)}>
-                <svg height={14} width={29}><use xlinkHref={showPassword? sprite+'#eye_open' : sprite+'#eye_close'}></use></svg> 
+                <svg height={20} width={30}><use xlinkHref={showPassword? sprite+'#eye_close' : sprite+'#eye_open'}></use></svg> 
               </div>       
             </div>
             {error && <div className={styles.error}>{error}</div>}

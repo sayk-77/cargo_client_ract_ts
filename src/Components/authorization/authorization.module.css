@@ -76,3 +76,7 @@
     color:#0bd366;
     font-size: 18px;
 } 
+
+.error {
+  color: red;
+}
