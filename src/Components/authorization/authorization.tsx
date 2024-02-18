@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 //@ts-ignore
 import styles from './authorization.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
 
 export const Authorization:React.FC = () => {
@@ -9,6 +9,8 @@ export const Authorization:React.FC = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [error, setError] = useState<string>("")
+
+    const navigate = useNavigate();
 
     const login = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
@@ -24,6 +26,7 @@ export const Authorization:React.FC = () => {
 
             const token: string = await response.data['token']
             localStorage.setItem('token', token)
+            navigate('/profile')
 
         } catch (err) {
             if (axios.isAxiosError(err)) {

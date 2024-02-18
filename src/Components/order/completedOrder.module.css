@@ -72,7 +72,7 @@
   
     .order_title {
       gap: 0;
-      justify-content: space-around;
+      justify-content: space-around; 
       padding-top: 20px;
     }
   }

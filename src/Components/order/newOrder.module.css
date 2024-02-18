@@ -1,78 +1,79 @@
 .newOrder {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .orders {
-    border-radius: 8px;
-    margin-top: 50px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-    overflow: auto;
-  }
-  
-  .order_title {
-    padding: 20px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) 1fr;
-    gap: 30px;
-    padding: 0 30px;
-  }
-  
-  .order_title > p {
-    padding-top: 20px;
-    text-align: center;
-    font-weight: 600;
-  }
-  
-  .order {
-    padding: 10px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) 1fr;
+  display: flex;
+  gap: 20px;
+}
+
+.orders {
+  border-radius: 8px;
+  width: 60vw;
+  margin-top: 50px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.order_title {
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1fr;
+  gap: 30px;
+  padding: 0 30px;
+}
+
+.order_title > p {
+  padding: 15px 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.order {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1fr;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.order > p {
+  text-align: center;
+}
+
+.order > svg {
+  place-self: center;
+}
+
+.filter_order {
+  display: flex;
+  max-width: 500px;
+  padding: 50px 0 25px 0;
+  gap: 25px;
+}
+
+.filter_order > a {
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.additional_svg {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .newOrder {
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
   }
-  
-  .order > p {
-    text-align: center;
+
+  .orders {
+    margin: 20px 0 0 0;
+    width: 90vw;
   }
-  
-  .order > svg {
-    place-self: center;
+
+  .order_title {
+    gap: 0;
+    justify-content: space-around; 
+    padding-top: 20px;
   }
-  
-  .filter_order {
-    display: flex;
-    max-width: 500px;
-    padding: 50px 0 25px 0;
-    gap: 25px;
-  }
-  
-  .filter_order > a {
-    font-size: 24px;
-    text-decoration: none;
-  }
-  
-  .additional_svg {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-  }
-  
-  @media screen and (max-width: 1000px) {
-    .newOrder {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .orders {
-      margin: 20px 0 0 0;
-      width: 90vw;
-    }
-  
-    .order_title {
-      gap: 0;
-      justify-content: space-around;
-      padding: 20px 0;
-    }
-  }
-  
+}
+

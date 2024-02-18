@@ -1,59 +1,61 @@
 .personal_data {
-    border-radius: 8px;
-    max-width: 600px;
-    margin: 50px 100px 0 0;
-    height: auto;
-    padding-bottom: 20px;
-    align-items: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-    text-align: center;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 50px 100px 0 0;
+  height: auto;
+  padding-bottom: 20px;
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .personal_data > h2 {
-    font-size: 18px;
-    font-weight: 600;
-    padding: 25px 0;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 25px 0;
 }
 
 .data_edit > input {
-    border: 0.50px solid #000;
-    border-radius: 5px;
-    max-width: 165px;
-    height: 29px;
+  border: 0.5px solid #000;
+  border-radius: 5px;
+  max-width: 165px;
+  height: 29px;
+  color: #1c1c1c;
+  font-weight: 600;
 }
 
 .data_edit > button {
-    display: flex;
-    border-radius: 10px;
-    height: 35px;
-    border: none;
-    justify-content: center;
-    align-items: center;
-    background: #0bd366;
-    padding: 8px 40px;
-    color: #fff;
+  display: flex;
+  border-radius: 10px;
+  height: 35px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  background: #0bd366;
+  padding: 8px 40px;
+  color: #fff;
 }
 
 .data_edit > p {
-    padding-bottom: 5px;
-    font-size: 14px;
+  padding-bottom: 5px;
+  font-size: 14px;
 }
 
 .data_edit_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 20px;
-    gap: 25px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 20px;
+  gap: 25px 50px;
 }
 
 @media screen and (max-width: 1000px) {
-    .data_edit {
-        max-width: 700px;
-    }
+  .data_edit {
+    max-width: 700px;
+  }
 
-    .personal_data {
-        margin: 20px auto;
-    }
+  .personal_data {
+    margin: 20px auto;
+  }
 }

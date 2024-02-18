@@ -4,11 +4,11 @@ import { UserInfo } from './userInfo'
 // @ts-ignore
 import styles from './profile.module.css'
 
-export const Profile:React.FC = () => {
+export const Profile: React.FC = () => {
   return (
     <section className={styles.profile}>
-        <ProfileDashBoard />
-        <UserInfo />
+      <ProfileDashBoard />
+      <UserInfo />
     </section>
   )
 }

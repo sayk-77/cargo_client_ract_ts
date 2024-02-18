@@ -1,86 +1,88 @@
 .header {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 30px 10px;
-    display: flex;
-    align-items: center;
-    padding-bottom: 120px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 10px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 120px;
 }
 
 .navigate > ul {
-    list-style: none;
-    display: flex;
-    gap: 55px;
+  list-style: none;
+  display: flex;
+  gap: 55px;
 }
 
 .logo {
-    transition: .5s;
+  transition: 0.5s;
 }
 
 .logo:hover {
-    transform: scale(1.3);
-    transition: .5s;
+  transform: scale(1.3);
+  transition: 0.5s;
 }
 
-.navigate > ul > li >a {
-    text-decoration: none;
-    color: black;
+.navigate > ul > li > a {
+  text-decoration: none;
+  color: black;
 }
 
 .navigate > ul > li > a:hover {
-    color: #0BD366;
-    transition: .3s;
+  color: #0bd366;
+  transition: 0.3s;
 }
 
 .navigate {
-    margin-left: 5%;
+  margin-left: 5%;
 }
 
-.auth {
-    display: flex;
-    gap: 30px;
-    margin-left: auto;
-    align-items: center;
+.auth,
+.profileIcon {
+  display: flex;
+  gap: 30px;
+  margin-left: auto;
+  align-items: center;
 }
 
 .log {
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .log:hover {
-    color: #0BD366;
-    transition: .3s;
+  color: #0bd366;
+  transition: 0.3s;
 }
 
 .reg {
-    gap: 10px;
-    padding: 5px 15px;
-    cursor: pointer;
-    height: 36px;
-    background-color: #fff;
-    border: 2px solid #0BD366;
-    border-radius: 20px;
-    color: #0BD366;
-    text-decoration: none;
+  gap: 10px;
+  padding: 5px 15px;
+  cursor: pointer;
+  height: 36px;
+  background-color: #fff;
+  border: 2px solid #0bd366;
+  border-radius: 20px;
+  color: #0bd366;
+  text-decoration: none;
 }
 
 .reg:hover {
-    color: #fff;
-    background-color: #0BD366;
-    transition: .5s;
+  color: #fff;
+  background-color: #0bd366;
+  transition: 0.5s;
 }
 
 @media screen and (max-width: 1000px) {
-    .navigate {
-        display: none;
-    }
-    .auth {
-        display: none;
-    }
-    .logo:hover {
-        transform: none;
-    }
+  .navigate {
+    display: none;
+  }
+  .auth,
+  .profileIcon {
+    display: none;
+  }
+  .logo:hover {
+    transform: none;
+  }
 }
