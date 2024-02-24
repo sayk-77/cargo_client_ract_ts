@@ -1,11 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // @ts-ignore
 import styles from './completedOrder.module.css'
 import { ProfileDashBoard } from '../profile/profileDashBoard'
 // @ts-ignore
 import sprite from '../../sprite.svg'
+import { CompletedOrderCard } from './completedOrderCard';
+import axios from 'axios';
+
+interface Orders {
+    ID: number;
+    orderDate: string;
+    orderPrice: number
+    CargoType: {
+      typeName: string;
+    };
+  }
 
 export const CompletedOrder:React.FC = () => {
+    const [orders, setOrders] = useState<Orders[]>([])
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+    
+        const getNewOrder = async () => {
+          try {
+            const response = await axios.post(
+              'http://192.168.105:5000/order/status',
+              {status: "Новый"},
+              {
+                headers: { Authorization: token },
+              },
+            )
+    
+            const data = await response.data
+            setOrders(data)
+            console.log(data);
+          } catch (err) {
+            console.log(err)
+          }
+        }
+        getNewOrder()
+      }, [])
   return (
         <section className={styles.completed_order}>
         <ProfileDashBoard />
@@ -17,13 +52,15 @@ export const CompletedOrder:React.FC = () => {
                     <p>Груз</p>
                     <p>Стоимость</p>
                 </div>
-                <div className={styles.order}>
-                    <p>1</p>
-                    <p>08-01-2024</p>
-                    <p>Электроника</p>
-                    <p>19 000 Р</p>
-                    <svg className={styles.additional_svg} height={22} width={27}><use xlinkHref={sprite+'#detail_order'}></use></svg>
-                </div>
+                {orders?.map((order) => (
+                    <CompletedOrderCard
+                    key={order.ID}
+                    orderNumber={order.ID}
+                    orderDate={order.orderDate}
+                    typeName={order.CargoType.typeName}
+                    orderPrice={order.orderPrice}
+                    />
+                ))}
             </div>
         </div>
     </section>

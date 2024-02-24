@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 // @ts-ignore
 import styles from './userInfo.module.css'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface UserInfo {
   id: number
@@ -14,6 +15,7 @@ interface UserInfo {
 
 export const UserInfo: React.FC = () => {
   const [userData, setUserData] = useState<UserInfo | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const userToken = localStorage.getItem('token')
@@ -30,7 +32,14 @@ export const UserInfo: React.FC = () => {
         const data = await response.data
         setUserData(data)
       } catch (err) {
-        console.log(err)
+        const axiosError = err as AxiosError<any>
+        if (
+          axiosError?.response?.status === 500 &&
+          axiosError?.response?.data === 'Invalid Token'
+        ) {
+          localStorage.removeItem('token')
+          navigate('/authorization')
+        }
       }
     }
 

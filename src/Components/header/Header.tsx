@@ -7,7 +7,6 @@ import { BurgerMenu } from './Burger'
 import { Link, useNavigate } from 'react-router-dom'
 
 export const Header: React.FC = () => {
-  const navigate = useNavigate()
   const token = localStorage.getItem('token')
 
   return (

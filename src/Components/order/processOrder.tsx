@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // @ts-ignore
 import styles from './processOrder.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 import { ProfileDashBoard } from '../profile/profileDashBoard'
+import { ProcessOrderCard } from './processOrderCard'
+import axios from 'axios'
+
+interface Orders {
+    ID: number
+    orderDate: string
+    deliveryDate: string
+  }
 
 export const ProcessOrder:React.FC = () => {
+    const [orders, setOrders] = useState<Orders[]>([])
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+    
+        const getNewOrder = async () => {
+          try {
+            const response = await axios.post(
+              'http://192.168.105:5000/order/status',
+              {status: "В процессе"},
+              {
+                headers: { Authorization: token },
+              },
+            )
+    
+            const data = await response.data
+            setOrders(data)
+            console.log(data);
+          } catch (err) {
+            console.log(err)
+          }
+        }
+        getNewOrder()
+      }, [])
+
   return (
     <section className={styles.processOrder}>
         <ProfileDashBoard />
@@ -16,12 +49,14 @@ export const ProcessOrder:React.FC = () => {
                     <p>Дата отправления</p>
                     <p>Дата доставки</p>
                 </div>
-                <div className={styles.order}>
-                    <p>1</p>
-                    <p>08-01-2024</p>
-                    <p>15-01-2024</p>
-                    <svg className={styles.additional_svg} height={22} width={27}><use xlinkHref={sprite+'#detail_order'}></use></svg>
-                </div>
+                {orders?.map((order) => (
+                    <ProcessOrderCard
+                    key={order.ID}
+                    orderNumber={order.ID}
+                    orderDate={order.orderDate}
+                    deliveryDate={order.deliveryDate}
+                    />
+                ))}
             </div>
         </div>
     </section>

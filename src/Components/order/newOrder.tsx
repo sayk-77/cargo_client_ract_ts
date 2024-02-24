@@ -1,29 +1,64 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // @ts-ignore
 import styles from './newOrder.module.css'
 import { ProfileDashBoard } from '../profile/profileDashBoard'
-// @ts-ignore
-import sprite from '../../sprite.svg'
+import { NewOrderCard } from './newOrderCard'
+import axios from 'axios'
 
-export const NewOrder:React.FC = () => {
+interface Orders {
+  ID: number;
+  orderDate: string;
+  CargoType: {
+    typeName: string;
+  };
+}
+
+export const NewOrder: React.FC = () => {
+  const [orders, setOrders] = useState<Orders[]>()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    const getNewOrder = async () => {
+      try {
+        const response = await axios.post(
+          'http://192.168.105:5000/order/status',
+          {status: "Новый"},
+          {
+            headers: { Authorization: token },
+          },
+        )
+
+        const data = await response.data
+        setOrders(data)
+        console.log(data);
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getNewOrder()
+  }, [])
+
   return (
     <section className={styles.newOrder}>
-        <ProfileDashBoard />
-        <div className={styles.orders_filter}>
-            <div className={styles.orders}>
-                <div className={styles.order_title}>
-                    <p>Номер</p>
-                    <p>Дата создания</p>
-                    <p>Груз</p>
-                </div>
-                <div className={styles.order}>
-                    <p>1</p>
-                    <p>08-01-2024</p>
-                    <p>Электроника</p>
-                    <svg className={styles.additional_svg} height={22} width={27}><use xlinkHref={sprite+'#detail_order'}></use></svg>
-                </div>
-            </div>
+      <ProfileDashBoard />
+      <div className={styles.orders_filter}>
+        <div className={styles.orders}>
+          <div className={styles.order_title}>
+            <p>Номер</p>
+            <p>Дата создания</p>
+            <p>Груз</p>
+          </div>
+          {orders?.map((order) => (
+            <NewOrderCard
+              key={order.ID}
+              orderNumber={order.ID}
+              orderDate={order.orderDate}
+              typeName={order.CargoType.typeName}
+            />
+          ))}
         </div>
+      </div>
     </section>
   )
 }
