@@ -36,6 +36,8 @@
     overflow: visible;
     position: fixed;
     right: 0px;
+    display: flex;
+    flex-direction: column;
     width: 180px;
     white-space: nowrap;
     background: #fff;
@@ -75,6 +77,11 @@
     text-decoration: none;
   }
 
+  .button_auth_reg {
+    display: flex;
+    flex-direction: column;
+  }
+
   .menu-item:hover {
     color: lightgreen;
     transition: .3s;
@@ -84,6 +91,7 @@
   .bm-burger-button{
     display: flex;
   }
+  
 }
 
 .dashBoardBurger {

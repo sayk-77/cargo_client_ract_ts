@@ -11,6 +11,7 @@ import { Setting } from './Components/setting/setting';
 import { NewOrder } from './Components/order/newOrder';
 import { ProcessOrder } from './Components/order/processOrder';
 import { CompletedOrder } from './Components/order/completedOrder';
+import { CreateOrder } from './Components/createOrder/createOrder';
 
 export const Router:React.FC = () => {
   return (
@@ -28,6 +29,7 @@ export const Router:React.FC = () => {
         <Route path='/order/process' element={<ProcessOrder />} />
         <Route path='/order/completed' element={<CompletedOrder />} />
         <Route path='/order/new' element={<NewOrder />} />
+        <Route path='/order/create' element={<CreateOrder />} />
       </Routes> 
     </BrowserRouter>
   )

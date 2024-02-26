@@ -35,14 +35,14 @@ export class BurgerMenu extends React.Component<ExampleProps> {
             Профиль
           </Link>
         ) : (
-          <div>
+          <>
             <Link to="/authorization" className="menu-item">
               Войти
             </Link>
             <Link to="/registration" className="menu-item">
               Регистрация
             </Link>
-          </div>
+          </>
         )}
         <Link id="/about" className="menu-item" to="/about">
           О нас

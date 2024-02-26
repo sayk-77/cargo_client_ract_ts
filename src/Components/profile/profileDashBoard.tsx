@@ -36,6 +36,7 @@ export const ProfileDashBoard:React.FC = () => {
                     <span onClick={toggleOrders}>Заказы</span>
                     {isOrdersOpen && (
                     <div className={styles.subMenu}>
+                        <Link to="/order/create" onClick={closeMenu}>Создать заказ</Link>
                         <Link to="/order/new" onClick={closeMenu}>Новые</Link>
                         <Link to="/order/process" onClick={closeMenu}>В процессе</Link>
                         <Link to="/order/completed" onClick={closeMenu}>Завершенные</Link>

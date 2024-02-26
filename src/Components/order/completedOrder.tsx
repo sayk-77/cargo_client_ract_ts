@@ -26,7 +26,7 @@ export const CompletedOrder:React.FC = () => {
           try {
             const response = await axios.post(
               'http://192.168.105:5000/order/status',
-              {status: "Новый"},
+              {status: "Завершен"},
               {
                 headers: { Authorization: token },
               },
@@ -34,7 +34,6 @@ export const CompletedOrder:React.FC = () => {
     
             const data = await response.data
             setOrders(data)
-            console.log(data);
           } catch (err) {
             console.log(err)
           }
@@ -49,7 +48,7 @@ export const CompletedOrder:React.FC = () => {
                 <div className={styles.order_title}>
                     <p>Номер</p>
                     <p>Дата доставки</p>
-                    <p>Груз</p>
+                    <p>Тип груза</p>
                     <p>Стоимость</p>
                 </div>
                 {orders?.map((order) => (

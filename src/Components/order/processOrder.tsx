@@ -23,7 +23,7 @@ export const ProcessOrder:React.FC = () => {
           try {
             const response = await axios.post(
               'http://192.168.105:5000/order/status',
-              {status: "В процессе"},
+              {status: "Доставляется"},
               {
                 headers: { Authorization: token },
               },
@@ -31,7 +31,6 @@ export const ProcessOrder:React.FC = () => {
     
             const data = await response.data
             setOrders(data)
-            console.log(data);
           } catch (err) {
             console.log(err)
           }
