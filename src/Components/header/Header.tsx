@@ -4,7 +4,7 @@ import styles from './header.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 import { BurgerMenu } from './Burger'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const Header: React.FC = () => {
   const token = localStorage.getItem('token')

@@ -51,15 +51,19 @@ export const CompletedOrder:React.FC = () => {
                     <p>Тип груза</p>
                     <p>Стоимость</p>
                 </div>
-                {orders?.map((order) => (
+                {orders?.length > 0 ? (
+                  orders.map((order) => (
                     <CompletedOrderCard
-                    key={order.ID}
-                    orderNumber={order.ID}
-                    orderDate={order.orderDate}
-                    typeName={order.CargoType.typeName}
-                    orderPrice={order.orderPrice}
+                      key={order.ID}
+                      orderNumber={order.ID}
+                      orderDate={order.orderDate}
+                      typeName={order.CargoType.typeName}
+                      orderPrice={order.orderPrice}
                     />
-                ))}
+                  ))
+                ) : (
+                  <p className={styles.notOrder}>У вас еще нет заказов 😞</p>
+                )}
             </div>
         </div>
     </section>

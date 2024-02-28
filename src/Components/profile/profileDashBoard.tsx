@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // @ts-ignore
 import styles from './profileDashBoard.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BurgerDashBoard } from './burgerDashBoard'
+import axios from 'axios'
 
+interface UserData {
+    firstName : string
+    email : string
+}
 
 export const ProfileDashBoard:React.FC = () => {
     const [isOrdersOpen, setOrdersOpen] = useState(false);
+    const [userData, setUserData] = useState<UserData | null>(null)
+    const navigate = useNavigate()
 
     const toggleOrders = () => {
         setOrdersOpen(!isOrdersOpen);
@@ -16,6 +23,11 @@ export const ProfileDashBoard:React.FC = () => {
 
     const closeMenu = () => {
         setOrdersOpen(false);
+    }
+
+    const logout = () => {
+        localStorage.removeItem('token')
+        navigate('/')
     }
 
   return (
@@ -49,12 +61,7 @@ export const ProfileDashBoard:React.FC = () => {
                 </div>
             </div>
             <div className={styles.briefly_user}>
-                <img src="/src/assets/user_avatar.png" alt="avatar" />
-                <div className={styles.user_info}>
-                    <p>Name</p>
-                    <p>email@email.ru</p>
-                </div>
-                <svg height={26} width={26}><use xlinkHref={sprite+'#logout'}></use></svg>
+                <p onClick={logout} style={{"cursor" : "pointer", "fontSize" : "18px"}}>Выйти</p>
             </div>
         </section>
         <BurgerDashBoard />

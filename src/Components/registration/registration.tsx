@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styles from './registration.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import InputMask from 'react-input-mask'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 
@@ -46,7 +46,7 @@ export const Registration:React.FC = () => {
       }
 
       try {
-        const response: AxiosResponse = await axios.post("http://192.168.0.105:5000/client/add", regData)
+        await axios.post("http://192.168.0.105:5000/client/add", regData)
         nav("/authorization")
       } catch (err) {
         if (axios.isAxiosError(err)) {

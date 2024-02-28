@@ -15,7 +15,7 @@ export const Banner:React.FC = () => {
                 <p>Перевозим грузы без лишних хлопот: ваш надежный партнер в грузоперевозках по России. Сделайте доставку легкой и эффективной</p>
                 <button className={styles.order}>Оформить доставку</button>
             </div>
-            <img src="/src/assets/banner-image.png" />
+            <img src="/assets/banner-image.png" />
         </section>
     </>
   )

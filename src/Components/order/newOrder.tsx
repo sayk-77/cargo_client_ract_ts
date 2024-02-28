@@ -16,27 +16,33 @@ interface Orders {
 export const NewOrder: React.FC = () => {
   const [orders, setOrders] = useState<Orders[]>()
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
 
-    const getNewOrder = async () => {
-      try {
-        const response = await axios.post(
-          'http://192.168.105:5000/order/status',
-          {status: "Создан"},
-          {
-            headers: { Authorization: token },
-          },
-        )
+  const getNewOrder = async () => {
+    try {
+      const response = await axios.post(
+        'http://192.168.105:5000/order/status',
+        {status: "Создан"},
+        {
+          headers: { Authorization: token },
+        },
+      )
 
-        const data = await response.data
-        setOrders(data)
-      } catch (err) {
-        console.log(err)
-      }
+      const data = await response.data
+      setOrders(data)
+    } catch (err) {
+      console.log(err)
     }
+  }
+
+  useEffect(() => {
     getNewOrder()
   }, [])
+
+
+  const deleteSuccess = () => {
+    getNewOrder()
+  }
 
   return (
     <section className={styles.newOrder}>
@@ -48,14 +54,19 @@ export const NewOrder: React.FC = () => {
             <p>Дата создания</p>
             <p>Тип груза</p>
           </div>
-          {orders?.map((order) => (
-            <NewOrderCard
-              key={order.ID}
-              orderNumber={order.ID}
-              orderDate={order.orderDate}
-              typeName={order.CargoType.typeName}
-            />
-          ))}
+          {orders && orders.length > 0 ? (
+            orders.map((order) => (
+              <NewOrderCard
+                key={order.ID}
+                orderNumber={order.ID}
+                orderDate={order.orderDate}
+                typeName={order.CargoType.typeName}
+                updateOrders={deleteSuccess}
+              />
+            ))
+          ) : (
+            <p className={styles.notOrder}>У вас еще нет заказов 😞</p>
+          )}
         </div>
       </div>
     </section>

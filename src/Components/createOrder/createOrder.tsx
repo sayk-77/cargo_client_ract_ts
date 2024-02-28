@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import styles from './createOrder.module.css';
 import axios from 'axios';
 import { geocodeByAddresses } from '../../tools/getDistance';
+import { useNavigate } from 'react-router-dom';
 
 interface CargoType {
-    id: number;
+    ID: number;
     typeName: string;
     PriceCoeff: number
   }
@@ -21,6 +22,7 @@ export const CreateOrder: React.FC = () => {
   const [distance, setDistance] = useState<number | undefined>(0)
   const [errorAddress, setErrorAddress] = useState<string>("")
   const [errorPrice, setErrorPrice] = useState<string>("")
+  const navigate = useNavigate()
 
   const calculatePrice = async (): Promise<void> => {
     const arrayAddress: string[] = [deliveryAddress, pickupAddress];
@@ -48,6 +50,7 @@ export const CreateOrder: React.FC = () => {
     if (selectedType && distance !== undefined) {
       const result = (basePriceDelivery + weight * basePriceWeightKg + size * baseSizePrice + distance * basePriceKm) * selectedType?.PriceCoeff
       setTotalPrice(Math.round(result))
+      setErrorPrice("")
     }
   };
 
@@ -80,15 +83,21 @@ export const CreateOrder: React.FC = () => {
     const selectedType = cargoType.find((type) => type.typeName === selectedCargoType)
 
     const orderData = {
-      "cargoTypeId": selectedType?.id,
+      "cargoTypeId": selectedType?.ID,
       "destinationAddress": pickupAddress,
       "sendingAddress": deliveryAddress,
       "orderPrice" : totalPrice
     }
 
+
     const response = await axios.post('http://192.168.0.105:5000/order/add', orderData, {
       headers: {Authorization: token}
     })
+    
+
+    if (response.status == 200) {
+      navigate('/order/new')
+    }
       
     }
 
@@ -123,7 +132,7 @@ export const CreateOrder: React.FC = () => {
         Тип груза:
         <select value={selectedCargoType} onChange={(e) => setSelectedCargoType(e.target.value)}>
           {cargoType.map((type) => (
-            <option key={type.id} value={type.typeName}>
+            <option key={type.ID} value={type.typeName}>
               {type.typeName}
             </option>
           ))}
@@ -152,7 +161,7 @@ export const CreateOrder: React.FC = () => {
       <div className={styles.price_container}>
         <h3>Стоимость заказа:</h3>
         <p>{totalPrice !== null ? `${totalPrice} рублей` : 'Цена не рассчитана'}</p>
-        <button onClick={calculatePrice}>Рассчитать цену</button>
+        <button type="button" onClick={calculatePrice}>Рассчитать цену</button>
       </div>
       {errorPrice && <div className={styles.error}>{errorPrice}</div>}
       <button className={styles.btnSend} type="submit">Оформить заказ</button>

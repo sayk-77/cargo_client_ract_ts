@@ -25,6 +25,12 @@
   font-weight: 600;
 }
 
+.notOrder {
+  text-align: center;
+  font-size: 24px;
+  padding: 10px 0 30px 0;
+}
+
 .order {
   display: grid;
   grid-template-columns: repeat(3, 1fr) 1fr;

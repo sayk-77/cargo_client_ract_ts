@@ -9,9 +9,10 @@ interface NewOrderCardProps {
     orderNumber: number
     orderDate: string
     typeName: string
+    updateOrders: () => void;
 }
 
-export const NewOrderCard: React.FC<NewOrderCardProps> = ({orderNumber, orderDate, typeName}) => {
+export const NewOrderCard: React.FC<NewOrderCardProps> = ({orderNumber, orderDate, typeName, updateOrders}) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
     const handlePopupOpen = () => {
@@ -34,7 +35,7 @@ export const NewOrderCard: React.FC<NewOrderCardProps> = ({orderNumber, orderDat
       </div>
 
       {isPopupOpen && (
-            <OrderPopup show={isPopupOpen} onClose={handlePopupClose} orderId={orderNumber} />
+            <OrderPopup show={isPopupOpen} onClose={handlePopupClose} orderId={orderNumber} onDeleteSuccess={updateOrders} />
         )}
     </>
   )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 // @ts-ignore
 import styles from './popup.module.css';
 
@@ -7,6 +7,7 @@ interface OrderPopupProps {
     show: boolean;
     onClose: () => void;
     orderId: number;
+    onDeleteSuccess: () => void;
 }
 
 interface Order {
@@ -21,7 +22,7 @@ interface Order {
     };
 }
 
-export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId }) => {
+export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId, onDeleteSuccess }) => {
     const [order, setOrder] = useState<Order | null>(null);
 
     useEffect(() => {
@@ -44,6 +45,17 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId }
         onClose();
     };
 
+    const deleteOrder = async (orderId : number) : Promise<void> => {
+      try {
+        const response: AxiosResponse = await axios.delete(`http://192.168.0.105:5000/order/delete/${orderId}`);
+        console.log(response.data);
+        onDeleteSuccess();
+        closePopup();
+    } catch (error: any) {
+        console.error(error.response.data.error);
+    }
+    }
+
     return (
         <section className={styles.popup} onClick={closePopup}>
           <article className={styles['popup-content']} onClick={(e) => e.stopPropagation()}>
@@ -61,6 +73,10 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId }
                 <p>Дата доставки: {order.deliveryDate}</p>
               )}
               <p>Цена доставки: {order?.orderPrice} ₽</p>
+              {order.status === 'Создан' ? (
+                <button onClick={() =>deleteOrder(orderId)} className={styles.buttonDelete}>Отменить</button>
+              ) : null}
+
             </article>
           </article>
         </section>

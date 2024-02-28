@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 // @ts-ignore
 import styles from './changePassword.module.css'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 
@@ -39,7 +39,7 @@ export const ChangePassword: React.FC = () => {
         newPassword: newPassword,
       }
 
-      const response = await axios.post(
+      await axios.post(
         'http://192.168.0.105:5000/client/change-password',
         dataPassword,
         {

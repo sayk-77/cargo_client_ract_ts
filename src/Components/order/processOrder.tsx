@@ -48,14 +48,18 @@ export const ProcessOrder:React.FC = () => {
                     <p>Дата отправления</p>
                     <p>Дата доставки</p>
                 </div>
-                {orders?.map((order) => (
+                {orders?.length > 0 ? (
+                  orders.map((order) => (
                     <ProcessOrderCard
-                    key={order.ID}
-                    orderNumber={order.ID}
-                    orderDate={order.orderDate}
-                    deliveryDate={order.deliveryDate}
+                      key={order.ID}
+                      orderNumber={order.ID}
+                      orderDate={order.orderDate}
+                      deliveryDate={order.deliveryDate}
                     />
-                ))}
+                  ))
+                ) : (
+                  <p className={styles.notOrder}>У вас еще нет заказов 😞</p>
+                )}
             </div>
         </div>
     </section>
