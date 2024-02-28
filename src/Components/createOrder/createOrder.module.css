@@ -21,24 +21,27 @@
 
 .error {
   color: red;
+  text-align: center;
 }
 
-form {
+.formOrder {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-label {
+.orderLabel {
   display: flex;
   flex-direction: column;
   font-size: 18px;
 }
 
-input, select, button {
+.orderInput, select {
   padding: 10px;
   font-size: 14px;
   margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid gray;
 }
 
 button {
@@ -51,7 +54,7 @@ button {
 }
 
 button:hover {
-  background-color: #0bd366;
+  background-color: #0da853;
 }
 
 .price_container {
@@ -74,20 +77,24 @@ button:hover {
   background-color: #0bd366;
   color: #fff;
   border: none;
-  padding: 15px 40px;
-  font-size: 18px;
+  padding: 10px 20px;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .price_container button:hover {
-  background-color: #0bd366;
+  background-color: #0da853;
 }
 
 @media screen and (max-width: 500px) {
   .price_container {
     flex-direction: column;
     gap: 15px;
+  }
+  .price_container > button {
+    padding: 15px 40px;
+    font-size: 24px;
   }
 }

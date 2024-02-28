@@ -19,9 +19,25 @@ export const CreateOrder: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState<number | null>(null);
   const [selectedCargoType, setSelectedCargoType] = useState<string>('');
   const [distance, setDistance] = useState<number | undefined>(0)
-  const [error, setError] = useState<string>("")
+  const [errorAddress, setErrorAddress] = useState<string>("")
+  const [errorPrice, setErrorPrice] = useState<string>("")
 
-  const calculatePrice = (): void => {
+  const calculatePrice = async (): Promise<void> => {
+    const arrayAddress: string[] = [deliveryAddress, pickupAddress];
+
+    try {
+        const result = await geocodeByAddresses(arrayAddress);
+        if (result === undefined) {
+          setErrorAddress("Не верный формат адреса! Пример: Москва, ул.Победы, д.32")
+          return
+        }
+        setDistance(result)
+        setErrorAddress("")
+
+    } catch (error : any) {
+        console.error("Ошибка при выполнении геокодирования:", error.message);
+    }
+
     const basePriceDelivery : number = 1000
     const basePriceKm: number = 20
     const basePriceWeightKg: number = 2
@@ -53,54 +69,57 @@ export const CreateOrder: React.FC = () => {
     getAllCargoType()
   }, [])
 
-  const CalculatePrice = async () : Promise<void> => {
-    const arrayAddress: string[] = [deliveryAddress, pickupAddress];
+  const createOrder = async (e: React.FormEvent) : Promise<void> => {
+    e.preventDefault()
 
-    try {
-        const result = await geocodeByAddresses(arrayAddress);
-        if (result === undefined) {
-          setError("Не верный формат адреса! Пример: Москва, ул.Победы, д.32")
-        }
-        setDistance(result)
-
-        calculatePrice()
-
-    } catch (error : any) {
-        console.error("Ошибка при выполнении геокодирования:", error.message);
+    if (totalPrice === null) {
+      setErrorPrice("Сначала расчитайте стоимость!")
+      return
     }
-  };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
+    const selectedType = cargoType.find((type) => type.typeName === selectedCargoType)
 
-  };
+    const orderData = {
+      "cargoTypeId": selectedType?.id,
+      "destinationAddress": pickupAddress,
+      "sendingAddress": deliveryAddress,
+      "orderPrice" : totalPrice
+    }
+
+    const response = await axios.post('http://192.168.0.105:5000/order/add', orderData, {
+      headers: {Authorization: token}
+    })
+      
+    }
 
   return (
   <div className={styles.container}>
     <h1>Оформление заказа</h1>
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={createOrder} className={styles.formOrder}>
+      <label className={styles.orderLabel}>
         Адрес доставки:
         <input
           type="text"
+          className={styles.orderInput}
           value={deliveryAddress}
           onChange={(e) => setDeliveryAddress(e.target.value)} 
           placeholder='Великий Новгород, ул. Софийская, д.32'
           required
         />
       </label>
-      <label>
+      <label className={styles.orderLabel}>
         Адрес отправки:
         <input
           type="text"
           value={pickupAddress}
+          className={styles.orderInput}
           onChange={(e) => setPickupAddress(e.target.value)} 
           placeholder='Санкт-Петербург, ул. Московская, д.23'
           required
         />
       </label>
-      {error && <div className={styles.error}>{error}</div>}
-      <label>
+      {errorAddress && <div className={styles.error}>{errorAddress}</div>}
+      <label className={styles.orderLabel}>
         Тип груза:
         <select value={selectedCargoType} onChange={(e) => setSelectedCargoType(e.target.value)}>
           {cargoType.map((type) => (
@@ -110,20 +129,22 @@ export const CreateOrder: React.FC = () => {
           ))}
         </select>
       </label>
-      <label>
+      <label className={styles.orderLabel}>
         Вес груза (кг):
         <input
           type="number"
           onChange={(e) => setWeight(Number(e.target.value))}
+          className={styles.orderInput}
           placeholder='100'
           required
         />
       </label>
-      <label>
+      <label className={styles.orderLabel}>
         Размер груза (м³):
         <input
           type="number"
           onChange={(e) => setSize(Number(e.target.value))}
+          className={styles.orderInput}
           placeholder='10'
           required
         />
@@ -131,8 +152,9 @@ export const CreateOrder: React.FC = () => {
       <div className={styles.price_container}>
         <h3>Стоимость заказа:</h3>
         <p>{totalPrice !== null ? `${totalPrice} рублей` : 'Цена не рассчитана'}</p>
-        <button onClick={CalculatePrice}>Рассчитать цену</button>
+        <button onClick={calculatePrice}>Рассчитать цену</button>
       </div>
+      {errorPrice && <div className={styles.error}>{errorPrice}</div>}
       <button className={styles.btnSend} type="submit">Оформить заказ</button>
     </form>
   </div>

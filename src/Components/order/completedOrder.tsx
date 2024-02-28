@@ -20,28 +20,28 @@ export const CompletedOrder:React.FC = () => {
     const [orders, setOrders] = useState<Orders[]>([])
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
-    
-        const getNewOrder = async () => {
-          try {
-            const response = await axios.post(
-              'http://192.168.105:5000/order/status',
-              {status: "Завершен"},
-              {
-                headers: { Authorization: token },
-              },
-            )
-    
-            const data = await response.data
-            setOrders(data)
-          } catch (err) {
-            console.log(err)
-          }
+      const token = localStorage.getItem('token')
+  
+      const getNewOrder = async () => {
+        try {
+          const response = await axios.post(
+            'http://192.168.105:5000/order/status',
+            {status: "Завершен"},
+            {
+              headers: { Authorization: token },
+            },
+          )
+  
+          const data = await response.data
+          setOrders(data)
+        } catch (err) {
+          console.log(err)
         }
-        getNewOrder()
-      }, [])
-  return (
-        <section className={styles.completed_order}>
+      }
+      getNewOrder()
+    }, [])
+    return (
+      <section className={styles.completed_order}>
         <ProfileDashBoard />
         <div className={styles.orders_filter}>
             <div className={styles.orders}>
