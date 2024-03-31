@@ -40,7 +40,7 @@ export const ChangePassword: React.FC = () => {
       }
 
       await axios.post(
-        'http://192.168.0.105:5000/client/change-password',
+        `${import.meta.env.VITE_SERVER_API_URL}/client/change-password`,
         dataPassword,
         {
           headers: { Authorization: token },

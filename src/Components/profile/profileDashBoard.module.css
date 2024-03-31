@@ -19,7 +19,7 @@
 
 .panel_link {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
     width: 150px;
     position: relative;
@@ -28,11 +28,17 @@
 
 .panel_link > p {
     font-size: 18px;
+    margin-left: 20px;
 }
 
 .panel_link > a {
     text-decoration: none;
     color: #000;
+    margin-left: 20px;  
+}
+
+.panel_link > span {
+    margin-left: 20px;
 }
 
 .subMenu {
@@ -56,13 +62,6 @@
 
 .subMenu > a:hover {
     background-color: #f5f5f5;
-}
-
-.briefly_user {
-    display: flex;
-    justify-content: space-evenly;
-    width: 250px;
-    align-items: center;
 }
 
 .user_info {

@@ -27,7 +27,7 @@ export const PersonalData: React.FC = () => {
     const fetchPersonalData = async () => {
       try {
         const response = await axios.get(
-          'http://192.168.0.105:5000/client/info',
+          `${import.meta.env.VITE_SERVER_API_URL}/client/info`,
           {
             headers: { Authorization: token },
           },
@@ -50,7 +50,7 @@ export const PersonalData: React.FC = () => {
   const saveChangeData = async () => {
     try {
       const token = localStorage.getItem('token')
-      await axios.post('http://192.168.0.105:5000/client/update', editedData, {
+      await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/client/update`, editedData, {
         headers: { Authorization: token },
       })
       setEditMode(false)

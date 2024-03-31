@@ -59,7 +59,7 @@ export const CreateOrder: React.FC = () => {
   useEffect(() => {
     const getAllCargoType = async () => {
         try {
-            const response = await axios.get('http://192.168.0.105:5000/cargo_type/all',
+            const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/cargo_type/all`,
             {
                 headers: {Authorization: token}
             })
@@ -90,7 +90,7 @@ export const CreateOrder: React.FC = () => {
     }
 
 
-    const response = await axios.post('http://192.168.0.105:5000/order/add', orderData, {
+    const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/order/add`, orderData, {
       headers: {Authorization: token}
     })
     

@@ -23,7 +23,7 @@ export const UserInfo: React.FC = () => {
     const getUserInfo = async () => {
       try {
         const response = await axios.get(
-          'http://192.168.105:5000/client/info',
+          `${import.meta.env.VITE_SERVER_API_URL}/client/info`,
           {
             headers: { Authorization: userToken },
           },

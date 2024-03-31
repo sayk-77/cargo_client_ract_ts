@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+.order_container {
+    display: flex;
+    margin-top: 30px;
+}
+
+.table_order {
+    width: 900px;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.table_order table {
+    max-width: 900px;
+    border: 1px solid #AEAEAE;
+    border-radius: 10px;
+    padding: 50px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 10px;
+}
+
+.table_order th, .table_order td {
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    text-align: center;
+    color: #7D7D7D;
+    padding: 20px 30px;
+}
+
+.table_order th {
+    text-align: center;
+    font-weight: bold;
+    color: #7D7D7D;
+    font-size: 14px;    
+    padding-bottom: 50px;
+}

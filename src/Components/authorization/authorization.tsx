@@ -15,14 +15,14 @@ export const Authorization:React.FC = () => {
     const login = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         setError("")
-        
+
         const loginData = {
             email: email,
             password: password
         }
         
         try {
-            const response: AxiosResponse<{token: string}>  = await axios.post("http://192.168.0.105:5000/client/login", loginData)
+            const response: AxiosResponse<{token: string}>  = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/client/login`, loginData)
 
             const token: string = await response.data['token']
             localStorage.setItem('token', token)

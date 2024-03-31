@@ -22,7 +22,7 @@ export const ProcessOrder:React.FC = () => {
         const getNewOrder = async () => {
           try {
             const response = await axios.post(
-              'http://192.168.105:5000/order/status',
+              `${import.meta.env.VITE_SERVER_API_URL}/order/status`,
               {status: "Доставляется"},
               {
                 headers: { Authorization: token },

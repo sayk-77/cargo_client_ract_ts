@@ -1,5 +1,5 @@
 import React from 'react'
-// @ts-ignore
+// @ts-expect-error
 import styles from './about.module.css'
 import { Header } from '../header/Header'
 import { Link } from 'react-router-dom'

@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 // @ts-ignore
 import styles from './profileDashBoard.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { BurgerDashBoard } from './burgerDashBoard'
-import axios from 'axios'
-
-interface UserData {
-    firstName : string
-    email : string
-}
 
 export const ProfileDashBoard:React.FC = () => {
     const [isOrdersOpen, setOrdersOpen] = useState(false);
-    const [userData, setUserData] = useState<UserData | null>(null)
     const navigate = useNavigate()
 
     const toggleOrders = () => {
@@ -60,7 +53,8 @@ export const ProfileDashBoard:React.FC = () => {
                     <Link to="/setting">Настройки</Link>
                 </div>
             </div>
-            <div className={styles.briefly_user}>
+            <div className={styles.panel_link}>
+                <svg height={25} width={25}><use xlinkHref={sprite+'#dashboard_logout'}></use></svg>
                 <p onClick={logout} style={{"cursor" : "pointer", "fontSize" : "18px"}}>Выйти</p>
             </div>
         </section>

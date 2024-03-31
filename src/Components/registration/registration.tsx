@@ -46,7 +46,7 @@ export const Registration:React.FC = () => {
       }
 
       try {
-        await axios.post("http://192.168.0.105:5000/client/add", regData)
+        await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/client/add`, regData)
         nav("/authorization")
       } catch (err) {
         if (axios.isAxiosError(err)) {

@@ -7,7 +7,7 @@ interface OrderPopupProps {
     show: boolean;
     onClose: () => void;
     orderId: number;
-    onDeleteSuccess: () => void;
+    onDeleteSuccess?: () => void;
 }
 
 interface Order {
@@ -28,7 +28,7 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId, 
     useEffect(() => {
         const getOrderById = async () => {
         try {
-            const response = await axios.get<Order>(`http://192.168.0.105:5000/order/${orderId}`);
+            const response = await axios.get<Order>(`${import.meta.env.VITE_SERVER_API_URL}/order/${orderId}`);
             setOrder(response.data);
         } catch (error) {
             console.error('Error fetching order:', error);
@@ -47,9 +47,9 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId, 
 
     const deleteOrder = async (orderId : number) : Promise<void> => {
       try {
-        const response: AxiosResponse = await axios.delete(`http://192.168.0.105:5000/order/delete/${orderId}`);
+        const response: AxiosResponse = await axios.delete(`${import.meta.env.VITE_SERVER_API_URL}/order/delete/${orderId}`);
         console.log(response.data);
-        onDeleteSuccess();
+        onDeleteSuccess && onDeleteSuccess();
         closePopup();
     } catch (error: any) {
         console.error(error.response.data.error);
@@ -76,7 +76,6 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId, 
               {order.status === 'Создан' ? (
                 <button onClick={() =>deleteOrder(orderId)} className={styles.buttonDelete}>Отменить</button>
               ) : null}
-
             </article>
           </article>
         </section>
