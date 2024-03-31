@@ -31,6 +31,10 @@
     margin-left: 20px;
 }
 
+.active {
+    color: #0bd366;
+}
+
 .panel_link > a {
     text-decoration: none;
     color: #000;
@@ -39,6 +43,8 @@
 
 .panel_link > span {
     margin-left: 20px;
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
 
 .subMenu {

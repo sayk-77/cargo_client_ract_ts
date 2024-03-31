@@ -42,7 +42,6 @@ export const CompletedOrder:React.FC = () => {
     }, [])
     return (
       <section className={styles.completed_order}>
-        <ProfileDashBoard />
         <div className={styles.orders_filter}>
             <div className={styles.orders}>
                 <div className={styles.order_title}>

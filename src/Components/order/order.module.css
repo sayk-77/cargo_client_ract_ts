@@ -1,0 +1,31 @@
+.order_container {
+    margin: 50px 0;
+
+}
+
+.order_filter {
+    display: flex;
+    gap: 30px;
+}
+
+.order_filter > p {
+    font-size: 24px;
+}
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter > button {
+    padding: 5px 10px;;
+}
+
+.filter_item {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.active {
+    color: #0bd366;
+}

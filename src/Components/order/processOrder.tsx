@@ -40,7 +40,6 @@ export const ProcessOrder:React.FC = () => {
 
   return (
     <section className={styles.processOrder}>
-        <ProfileDashBoard />
         <div className={styles.orders_filter}>
             <div className={styles.orders}>
                 <div className={styles.order_title}>

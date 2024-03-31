@@ -96,7 +96,7 @@ export const CreateOrder: React.FC = () => {
     
 
     if (response.status == 200) {
-      navigate('/order/new')
+      navigate('/profile');
     }
       
     }

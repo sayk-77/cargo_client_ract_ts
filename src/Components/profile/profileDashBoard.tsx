@@ -6,7 +6,15 @@ import sprite from '../../sprite.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { BurgerDashBoard } from './burgerDashBoard'
 
-export const ProfileDashBoard:React.FC = () => {
+interface ProfileDashBoardProps {
+    activeMenuItem: string;
+    onMenuItemClick: (menuItem: string) => void;
+}
+
+export const ProfileDashBoard: React.FC<ProfileDashBoardProps> = ({ activeMenuItem, onMenuItemClick }) => {
+    const handleClick = (menuItem: string) => {
+        onMenuItemClick(menuItem);
+    };
     const [isOrdersOpen, setOrdersOpen] = useState(false);
     const navigate = useNavigate()
 
@@ -30,7 +38,7 @@ export const ProfileDashBoard:React.FC = () => {
             <div className={styles.panel_menu}>
                 <div className={styles.panel_link}>
                     <svg height={25} width={25}><use xlinkHref={sprite+'#profile'}></use></svg>
-                    <Link to="/profile">Профиль</Link>
+                    <span className={activeMenuItem === 'profile' ? styles.active : ''} onClick={() => handleClick('profile')}>Профиль</span>
                 </div>
                 <div className={styles.panel_link}>
                     <svg height={26} width={26}><use xlinkHref={sprite+'#home'}></use></svg>
@@ -38,19 +46,11 @@ export const ProfileDashBoard:React.FC = () => {
                 </div>
                 <div className={styles.panel_link}>
                     <svg height={25} width={25}><use xlinkHref={sprite+'#order'}></use></svg>
-                    <span onClick={toggleOrders}>Заказы</span>
-                    {isOrdersOpen && (
-                    <div className={styles.subMenu}>
-                        <Link to="/order/create" onClick={closeMenu}>Создать заказ</Link>
-                        <Link to="/order/new" onClick={closeMenu}>Новые</Link>
-                        <Link to="/order/process" onClick={closeMenu}>В процессе</Link>
-                        <Link to="/order/completed" onClick={closeMenu}>Завершенные</Link>
-                    </div>
-                    )}
+                    <span className={activeMenuItem === 'order' ? styles.active : ''} onClick={() => handleClick('order')}>Заказы</span>
                 </div>
                 <div className={styles.panel_link}>
                     <svg height={25} width={25}><use xlinkHref={sprite+'#setting'}></use></svg>
-                    <Link to="/setting">Настройки</Link>
+                    <span className={activeMenuItem === 'setting' ? styles.active : ''} onClick={() => handleClick('setting')}>Настройки</span>
                 </div>
             </div>
             <div className={styles.panel_link}>

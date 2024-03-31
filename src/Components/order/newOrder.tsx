@@ -46,7 +46,6 @@ export const NewOrder: React.FC = () => {
 
   return (
     <section className={styles.newOrder}>
-      <ProfileDashBoard />
       <div className={styles.orders_filter}>
         <div className={styles.orders}>
           <div className={styles.order_title}>

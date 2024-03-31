@@ -1,6 +1,6 @@
 .profile {
     display: flex;
-    justify-content : space-between;
+    justify-content : space;
     gap : 20px
 }
 
