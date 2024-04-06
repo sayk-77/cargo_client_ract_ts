@@ -1,15 +1,17 @@
 import React from 'react'
 // @ts-ignore
 import styles from './create_order.module.css'
-import { Dashboard } from '../dashboard/adminDashboard'
 // @ts-ignore
 import sprite from '../../../sprite.svg'
+import { useNavigate } from 'react-router-dom'
 
 
 export const MakeOrder:React.FC = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div className={styles.make_order}>
-        <Dashboard />
         <div className={styles.make_order_container}>
             <div className={styles.top_order}>
                 <p>ID заказа - 3</p>
@@ -63,11 +65,16 @@ export const MakeOrder:React.FC = () => {
                     <input className={styles.input_order} type="text" placeholder='07.01.2024' />
                 </div>
             </div>
-            <button className={styles.make}>
-                <svg height={13} width={18}>
-                    <use xlinkHref={`${sprite}#ok`}></use>
-                </svg>
-            </button>
+            <div className={styles.order_btn}>
+                <button className={styles.make_cancel} onClick={() => navigate('/dashboard')}>
+                    Отменить
+                </button>
+                <button className={styles.make_ok}>
+                    <svg height={13} width={18}>
+                        <use xlinkHref={`${sprite}#ok`}></use>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
   )

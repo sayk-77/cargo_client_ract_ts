@@ -1,7 +1,9 @@
 .make_order {
-    margin-top: 30px;
     display: flex;
     gap: 110px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .make_order_container {
@@ -63,9 +65,24 @@
     border: none;
 }
 
-.make {
-    margin-top: 15px;
-    margin-left: 81%;
+.make_ok {
     background: #0bd366;
-    padding: 10px 65px;
+    padding: 10px 20px;
+}
+
+.make_cancel {
+    background-color: red;
+    padding: 10px 20px;
+}
+
+.make_cancel:hover {
+    background-color: #770a0a;
+}
+
+.order_btn {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    gap: 15px;
+    margin-left: 74%;
 }

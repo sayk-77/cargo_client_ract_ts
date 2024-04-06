@@ -1,7 +1,6 @@
 .search_pagination {
     width: 900px;
     display: flex;
-    margin-left: 100px;
     margin-bottom: 50px;
     justify-content: space-between;
   }

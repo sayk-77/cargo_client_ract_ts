@@ -53,22 +53,16 @@ export const UserInfo: React.FC = () => {
       <div className={styles.info_blocks}>
         <div className={styles.info_block}>
           <p>Имя</p>
-          <p>{userData?.firstName}</p>
-        </div>
-        <div className={styles.info_block}>
           <p>Фамилия</p>
-          <p>{userData?.lastName}</p>
-        </div>
-        <div className={styles.info_block}>
-          <p>Адрес</p>
-          <p>{userData?.address}</p>
-        </div>
-        <div className={styles.info_block}>
+          <p>Адресс</p>
           <p>Номер телефона</p>
-          <p>{userData?.phoneNumber}</p>
+          <p>Почта</p>
         </div>
         <div className={styles.info_block}>
-          <p>Электронная почта</p>
+          <p>{userData?.firstName}</p>
+          <p>{userData?.lastName}</p>
+          <p>{userData?.address}</p>
+          <p>{userData?.phoneNumber}</p>
           <p>{userData?.email}</p>
         </div>
       </div>

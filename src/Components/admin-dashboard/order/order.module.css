@@ -2,13 +2,28 @@
 
 .order_container {
     display: flex;
-    margin-top: 30px;
 }
 
 .table_order {
     width: 900px;
     margin-top: 20px;
-    margin-left: 100px;
+}
+
+.filter {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 15px;
+}
+
+.filter > p {
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.active_filter {
+    color: #0bd366;
 }
 
 .table_order table {

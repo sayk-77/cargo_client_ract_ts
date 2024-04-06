@@ -1,0 +1,16 @@
+.element th, .element td {
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    text-align: center;
+    color: #7D7D7D;
+    padding: 20px 30px;
+}
+
+.element th {
+    text-align: center;
+    font-weight: bold;
+    color: #7D7D7D;
+    font-size: 14px;    
+    padding-bottom: 50px;
+}

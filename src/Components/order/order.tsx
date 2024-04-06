@@ -6,6 +6,13 @@ import { ProcessOrder } from './processOrder';
 import { CompletedOrder } from './completedOrder';
 import { useNavigate } from 'react-router-dom';
 
+interface Order {
+    ID: number;
+    status: string;
+    cargoType: string;
+    price: number;
+    customer: string;
+}
 
 
 export const Order:React.FC = () => {

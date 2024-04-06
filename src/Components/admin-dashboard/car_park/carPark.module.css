@@ -1,10 +1,8 @@
 .car_park_container {
     display: flex;
-    margin-top: 30px;
 }
 
 .car_cards {
     display: flex;
-    margin-left: 100px;
     justify-content: space-between;
 }

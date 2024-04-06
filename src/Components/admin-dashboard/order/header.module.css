@@ -1,0 +1,8 @@
+.tableOrder th, .tableOrder td {
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    text-align: center;
+    color: #7D7D7D;
+    padding: 20px 30px;
+}

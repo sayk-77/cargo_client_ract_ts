@@ -15,16 +15,8 @@ export const ProfileDashBoard: React.FC<ProfileDashBoardProps> = ({ activeMenuIt
     const handleClick = (menuItem: string) => {
         onMenuItemClick(menuItem);
     };
-    const [isOrdersOpen, setOrdersOpen] = useState(false);
+
     const navigate = useNavigate()
-
-    const toggleOrders = () => {
-        setOrdersOpen(!isOrdersOpen);
-    };
-
-    const closeMenu = () => {
-        setOrdersOpen(false);
-    }
 
     const logout = () => {
         localStorage.removeItem('token')

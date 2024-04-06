@@ -2,14 +2,12 @@ import React from 'react'
 // @ts-ignore
 import styles from './customers.module.css'
 import { Search_pagination } from '../../search_pagination/search_pagination'
-import { Dashboard } from '../dashboard/adminDashboard'
 // @ts-ignore
 import sprite from '../../../sprite.svg'
 
 export const Customers:React.FC = () => {
   return (
     <div className={styles.customers_container}>
-        <Dashboard />
         <div className={styles.customers_content}>
             <Search_pagination />
             <div className={styles.table_customers}>

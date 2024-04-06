@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 // @ts-ignore
-import styles from './dashboard.module.css'
+import styles from './adminDashboard.module.css'
 // @ts-ignore
 import sprite from '../../../sprite.svg'
 import { Link, useNavigate } from 'react-router-dom'
 
-export const Dashboard:React.FC = () => {
-  const [activeItem, setActiveItem] = useState<string>('orders')
+interface DashboardMenuProps {
+  activeMenuItem: string;
+  onMenuItemClick: (menuItem: string) => void;
+}
+
+export const DashboardMenu:React.FC<DashboardMenuProps> = ({activeMenuItem, onMenuItemClick}) => {
   const navigate = useNavigate();
 
-  const changeActiveItem = (itemName: string) : void => {
-    setActiveItem(itemName)
-  }
+  const handleClick = (menuItem: string) => {
+    onMenuItemClick(menuItem);
+  };
 
   const logout = (): void => {
     localStorage.removeItem('token')
@@ -24,49 +28,29 @@ export const Dashboard:React.FC = () => {
             <use xlinkHref={sprite + '#logo'}></use>
         </svg>
         <ul className={styles.dashboard_navigate}>
-          <li
-            className={`${styles.dashboard_navigate__item} ${activeItem === 'orders' && styles.dashboard_navigate__active}`}
-            onClick={() => changeActiveItem('orders')}
-          >
-            <Link to="/dashboard/order">
-              <svg height={25} width={25}>
-                <use xlinkHref={`${sprite}#dashboard_order`}></use>
-              </svg>
-              Заказы
-            </Link>
+          <li>
+            <svg height={25} width={25}>
+              <use xlinkHref={`${sprite}#dashboard_order`}></use>
+            </svg>
+            <span className={activeMenuItem === 'order' ? styles.active : ''} onClick={() => handleClick('order')}>Заказы</span>
           </li>
-          <li
-            className={`${styles.dashboard_navigate__item} ${activeItem === 'drivers' && styles.dashboard_navigate__active}`}
-            onClick={() => changeActiveItem('drivers')}
-          >
-            <Link to="/dashboard/driver">
-              <svg height={25} width={25}>
-                <use xlinkHref={`${sprite}#dashboard_driver`}></use>
-              </svg>
-              Водители
-            </Link>
+          <li>
+            <svg height={25} width={25}>
+              <use xlinkHref={`${sprite}#dashboard_car_park`}></use>
+            </svg>
+            <span className={activeMenuItem === 'car-park' ? styles.active : ''} onClick={() => handleClick('car-park')}>Автомобили</span>
           </li>
-          <li
-            className={`${styles.dashboard_navigate__item} ${activeItem === 'carPark' && styles.dashboard_navigate__active}`}
-            onClick={() => changeActiveItem('carPark')}
-          >
-            <Link to="/dashboard/car_park">
-              <svg height={25} width={25}>
-                <use xlinkHref={sprite + '#dashboard_car_park'}></use>
-              </svg>
-              Автопарк
-            </Link>
-          </li>        
-          <li
-            className={`${styles.dashboard_navigate__item} ${activeItem === 'customers' && styles.dashboard_navigate__active}`}
-            onClick={() => changeActiveItem('customers')}
-          >
-            <Link to="/dashboard/customer">
-              <svg height={25} width={25}>
-                <use xlinkHref={sprite + '#dashboard_customers'}></use>
-              </svg>
-              Клиенты
-            </Link>
+          <li>
+            <svg height={25} width={25}>
+              <use xlinkHref={`${sprite}#dashboard_driver`}></use>
+            </svg>
+            <span className={activeMenuItem === 'order' ? styles.active : ''} onClick={() => handleClick('driver')}>Водители</span>
+          </li>     
+          <li>
+            <svg height={25} width={25}>
+              <use xlinkHref={`${sprite}#dashboard_customers`}></use>
+            </svg>
+            <span className={activeMenuItem === 'order' ? styles.active : ''} onClick={() => handleClick('customers')}>Клиенты</span>
           </li>
           <li>
             <a style={{"cursor" : "pointer"}} onClick={logout}>

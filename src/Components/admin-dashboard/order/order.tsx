@@ -1,106 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 // @ts-ignore
 import styles from './order.module.css'
 import { Search_pagination } from '../../search_pagination/search_pagination'
-import { Dashboard } from '../dashboard/adminDashboard'
 // @ts-ignore
-import sprite from '../../../sprite.svg'
-import { useNavigate } from 'react-router-dom'
+import { TableOrder } from './table'
+
 
 export const Order: React.FC = () => {
-  const navigate = useNavigate()
+  const [activeFilter, setActiveFilter] = useState<string>("Создан")
+
+  const changeActiveFilter = (filter: string) => {
+    setActiveFilter(filter)
+  }
 
   return (
     <div className={styles.order_container}>
-        <Dashboard />
         <div className={styles.order_content}>
           <Search_pagination />
           <div className={styles.table_order}>
-            <table>
-              <thead>
-                  <tr>
-                      <th>ID заказа</th>
-                      <th>Статус</th>
-                      <th>Тип груза</th>
-                      <th>Стоимость</th>
-                      <th>Заказчик</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td style={{"color" : "#000", "fontSize": "15px", "fontWeight": "600"}}>1</td>
-                      <td>Создан</td>
-                      <td>Электроника</td>
-                      <td>20 000 рублей</td>
-                      <td>Крючков Дмитрий</td>
-                      <td>
-                        <svg height={14} width={8} style={{"cursor" : "pointer"}} onClick={() => navigate('/create-order')}>
-                          <use xlinkHref={sprite + '#arrow_detail'} ></use>
-                        </svg>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td style={{"color" : "#000", "fontSize": "15px", "fontWeight": "600"}}>1</td>
-                      <td>Создан</td>
-                      <td>Электроника</td>
-                      <td>20 000 рублей</td>
-                      <td>Крючков Дмитрий</td>
-                      <td>
-                        <svg height={14} width={8} style={{"cursor" : "pointer"}}>
-                          <use xlinkHref={sprite + '#arrow_detail'}></use>
-                        </svg>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td style={{"color" : "#000", "fontSize": "15px", "fontWeight": "600"}}>1</td>
-                      <td>Создан</td>
-                      <td>Электроника</td>
-                      <td>20 000 рублей</td>
-                      <td>Крючков Дмитрий</td>
-                      <td>
-                        <svg height={14} width={8} style={{"cursor" : "pointer"}}>
-                          <use xlinkHref={sprite + '#arrow_detail'}></use>
-                        </svg>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td style={{"color" : "#000", "fontSize": "15px", "fontWeight": "600"}}>1</td>
-                      <td>Создан</td>
-                      <td>Электроника</td>
-                      <td>20 000 рублей</td>
-                      <td>Крючков Дмитрий</td>
-                      <td>
-                        <svg height={14} width={8} style={{"cursor" : "pointer"}}>
-                          <use xlinkHref={sprite + '#arrow_detail'}></use>
-                        </svg>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td style={{"color" : "#000", "fontSize": "15px", "fontWeight": "600"}}>1</td>
-                      <td>Создан</td>
-                      <td>Электроника</td>
-                      <td>20 000 рублей</td>
-                      <td>Крючков Дмитрий</td>
-                      <td>
-                        <svg height={14} width={8} style={{"cursor" : "pointer"}}>
-                          <use xlinkHref={sprite + '#arrow_detail'}></use>
-                        </svg>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td style={{"color" : "#000", "fontSize": "15px", "fontWeight": "600"}}>1</td>
-                      <td>Создан</td>
-                      <td>Электроника</td>
-                      <td>20 000 рублей</td>
-                      <td>Крючков Дмитрий</td>
-                      <td>
-                        <svg height={14} width={8} style={{"cursor" : "pointer"}}>
-                          <use xlinkHref={sprite + '#arrow_detail'}></use>
-                        </svg>
-                      </td>
-                  </tr>
-              </tbody>
-            </table>
+            <div className={styles.filter}>
+              <p 
+                className={activeFilter === 'Создан' ? styles.active_filter : ''}
+                onClick={() => changeActiveFilter('Создан')}
+              >
+                Новые
+              </p>
+              <p 
+                className={activeFilter === 'В процессе' ? styles.active_filter : ''}
+                onClick={() => changeActiveFilter('В процессе')}
+              >
+                В процессе
+              </p>
+              <p 
+                className={activeFilter === 'Завершен' ? styles.active_filter : ''}
+                onClick={() => changeActiveFilter('Завершен')}
+              >
+                Завершенные
+              </p>
+            </div>
+            <TableOrder status={activeFilter}/>
           </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { ProfileDashBoard } from './profileDashBoard'
 import { UserInfo } from './userInfo'
 // @ts-ignore
