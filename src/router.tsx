@@ -30,10 +30,6 @@ export const Router:React.FC = () => {
         <Route path='/authorization' element={<Authorization />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/setting' element={<Setting />} />
-        <Route path='/order/process' element={<ProcessOrder />} />
-        <Route path='/order/completed' element={<CompletedOrder />} />
-        <Route path='/order/new' element={<NewOrder />} />
         <Route path='/create' element={<CreateOrder />} />
         <Route path='/dashboard/order' element={<Order />} />
         <Route path='/dashboard/driver' element={<Driver />} />

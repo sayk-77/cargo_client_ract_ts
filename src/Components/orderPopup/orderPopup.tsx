@@ -15,6 +15,7 @@ interface Order {
     status: string;
     deliveryDate: string;
     orderPrice: number;
+    recipient: string;
     sendingAddress: string;
     destinationAddress: string;
     CargoType: {
@@ -64,15 +65,16 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId, 
             </span>
             <h2>Информация о заказе №{orderId}</h2>
             <article className={styles.orderInfo}>
-              <p>Дата создания: {order?.orderDate}</p>
-              <p>Статус: {order?.status}</p>
-              <p>Тип груза: {order?.CargoType.typeName}</p>
-              <p>Адрес назначения: {order?.destinationAddress}</p>
-              <p>Адрес отправления: {order?.sendingAddress}</p>
+              <p><strong>Дата создания:</strong> {order?.orderDate}</p>
+              <p><strong>Статус:</strong> {order?.status}</p>
+              <p><strong>Тип груза:</strong> {order?.CargoType.typeName}</p>
+              <p><strong>Адрес назначения:</strong> {order?.destinationAddress}</p>
+              <p><strong>ФИО получателя:</strong> {order?.recipient}</p>
+              <p><strong>Адрес отправления:</strong> {order?.sendingAddress}</p>
               {order.status !== 'Создан' && order.deliveryDate && (
-                <p>Дата доставки: {order.deliveryDate}</p>
+                <p><strong>Дата доставки:</strong> {order.deliveryDate}</p>
               )}
-              <p>Цена доставки: {order?.orderPrice} ₽</p>
+              <p><strong>Цена доставки:</strong> {order?.orderPrice} ₽</p>
               {order.status === 'Создан' ? (
                 <button onClick={() =>deleteOrder(orderId)} className={styles.buttonDelete}>Отменить</button>
               ) : null}

@@ -22,6 +22,7 @@ export const CreateOrder: React.FC = () => {
   const [distance, setDistance] = useState<number | undefined>(0)
   const [errorAddress, setErrorAddress] = useState<string>("")
   const [errorPrice, setErrorPrice] = useState<string>("")
+  const [recipient, setRecipient] = useState<string>("")
   const navigate = useNavigate()
 
   const calculatePrice = async (): Promise<void> => {
@@ -86,7 +87,8 @@ export const CreateOrder: React.FC = () => {
       "cargoTypeId": selectedType?.ID,
       "destinationAddress": pickupAddress,
       "sendingAddress": deliveryAddress,
-      "orderPrice" : totalPrice
+      "orderPrice" : totalPrice,
+      "recipient": recipient
     }
 
 
@@ -128,6 +130,17 @@ export const CreateOrder: React.FC = () => {
         />
       </label>
       {errorAddress && <div className={styles.error}>{errorAddress}</div>}
+      <label className={styles.orderLabel}>
+        ФИО получателя:
+        <input
+          type="text"
+          value={recipient}
+          className={styles.orderInput}
+          onChange={(e) => setRecipient(e.target.value)}
+          placeholder='Иванов Иван Иванович'
+          required
+        />
+      </label>
       <label className={styles.orderLabel}>
         Тип груза:
         <select value={selectedCargoType} onChange={(e) => setSelectedCargoType(e.target.value)}>
