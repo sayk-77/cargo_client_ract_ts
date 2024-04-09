@@ -3,8 +3,11 @@ import React from 'react'
 import styles from './banner.module.css'
 // @ts-ignore
 import sprite from '../../sprite.svg'
+import { useNavigate } from 'react-router-dom'
 
 export const Banner:React.FC = () => {
+  const navigate = useNavigate()
+
   return (
     <>
         <section className={styles.banner}>
@@ -13,7 +16,7 @@ export const Banner:React.FC = () => {
                     <span className={styles.title_company_name}> QuickGo</span>
                 </h1>
                 <p>Перевозим грузы без лишних хлопот: ваш надежный партнер в грузоперевозках по России. Сделайте доставку легкой и эффективной</p>
-                <button className={styles.order}>Оформить доставку</button>
+                <button className={styles.order} onClick={() => navigate('/profile')}>Оформить доставку</button>
             </div>
             <img src="/assets/banner-image.png" />
         </section>

@@ -49,7 +49,7 @@ export const TableOrder:React.FC<TableProps> = ({status}) => {
     }, [])
 
     return (
-        <table style={{"width": "920px"}}>
+        <table style={{"minWidth": "900px"}}>
             <HeaderTable status={status}/>
             <BodyTable orders={filteredOrders} />
         </table>
