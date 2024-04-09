@@ -8,8 +8,9 @@ export const Login: React.FC = () => {
   const [error, setError] = useState<string>('')
 
   return (
-    <div>
+    <div className={styles.login}>
       <div className={styles.main}>
+        <h1 className={styles.title}>Вход в панель управления</h1>
         <form>
           <label className={styles.label} htmlFor="first">
             Почта:

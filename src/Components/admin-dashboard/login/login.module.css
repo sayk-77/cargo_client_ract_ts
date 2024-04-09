@@ -1,4 +1,4 @@
-.login_form {
+.login {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,6 +7,10 @@
   background: #f3f3f3;
   flex-direction: column;
   margin: 0;
+}
+
+.title {
+  font-size: 24px;
 }
 
 .main {
@@ -18,14 +22,6 @@
   max-width: 500px;
   width: 100%;
   text-align: center;
-}
-
-.logo {
-  font-size: 32px;
-  color: #0bd366;
-  font-family: 'Josefin Sans';
-  font-weight: bold;
-  text-decoration: none;
 }
 
 .label {
@@ -70,11 +66,6 @@
 .wrap > button:hover {
   background-color: #5dd392;
   transition: 0.3s;
-}
-
-.create_profile > a {
-  color: #0bd366;
-  font-size: 18px;
 }
 
 .error {

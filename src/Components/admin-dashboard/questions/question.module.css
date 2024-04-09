@@ -1,13 +1,13 @@
-.driver_container {
+.question_container {
   display: flex;
 }
 
-.table_driver {
-  width: 900px;
+.table_question {
+  min-width: 900px;
   margin-top: 20px;
 }
 
-.table_driver table {
+.table_question table {
   min-width: 900px;
   border: 1px solid #aeaeae;
   border-radius: 10px;
@@ -17,8 +17,8 @@
   -khtml-border-radius: 10px;
 }
 
-.table_driver th,
-.table_driver td {
+.table_question th,
+.table_question td {
   padding: 8px;
   text-align: left;
   font-size: 13px;
@@ -27,7 +27,7 @@
   padding: 20px 30px;
 }
 
-.table_driver th {
+.table_question th {
   text-align: center;
   font-weight: bold;
   color: #7d7d7d;
