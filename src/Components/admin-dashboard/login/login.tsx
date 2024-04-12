@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// @ts-ignore
 import styles from './login.module.css'
 
 export const Login: React.FC = () => {

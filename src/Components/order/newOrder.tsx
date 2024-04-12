@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
-// @ts-ignore
 import styles from './newOrder.module.css'
-import { ProfileDashBoard } from '../profile/profileDashBoard'
 import { NewOrderCard } from './newOrderCard'
 import axios from 'axios'
 
 interface Orders {
-  ID: number;
-  orderDate: string;
+  ID: number
+  orderDate: string
   CargoType: {
-    typeName: string;
-  };
+    typeName: string
+  }
 }
 
 export const NewOrder: React.FC = () => {
@@ -22,7 +20,7 @@ export const NewOrder: React.FC = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_API_URL}/order/status`,
-        {status: "Создан"},
+        { status: 'Создан' },
         {
           headers: { Authorization: token },
         },
@@ -38,7 +36,6 @@ export const NewOrder: React.FC = () => {
   useEffect(() => {
     getNewOrder()
   }, [])
-
 
   const deleteSuccess = () => {
     getNewOrder()

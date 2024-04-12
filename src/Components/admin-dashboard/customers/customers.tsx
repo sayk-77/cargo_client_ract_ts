@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-// @ts-ignore
 import styles from './customers.module.css'
 import { Search_pagination } from '../../search_pagination/search_pagination'
-// @ts-ignore
-import sprite from '../../../sprite.svg'
 import { CustomerCard } from './customerCard'
 import axios from 'axios'
 

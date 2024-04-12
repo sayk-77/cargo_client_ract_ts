@@ -1,7 +1,5 @@
 import React from 'react'
-// @ts-ignore
 import styles from './header.module.css'
-// @ts-ignore
 import sprite from '../../sprite.svg'
 import { BurgerMenu } from './Burger'
 import { Link } from 'react-router-dom'

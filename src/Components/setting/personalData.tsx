@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// @ts-ignore
 import styles from './personalData.module.css'
 import axios from 'axios'
 
@@ -50,9 +49,13 @@ export const PersonalData: React.FC = () => {
   const saveChangeData = async () => {
     try {
       const token = localStorage.getItem('token')
-      await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/client/update`, editedData, {
-        headers: { Authorization: token },
-      })
+      await axios.post(
+        `${import.meta.env.VITE_SERVER_API_URL}/client/update`,
+        editedData,
+        {
+          headers: { Authorization: token },
+        },
+      )
       setEditMode(false)
       setData(editedData)
       console.log(editedData)

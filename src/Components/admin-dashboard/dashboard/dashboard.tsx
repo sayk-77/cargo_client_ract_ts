@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// @ts-ignore
 import styles from './dashboard.module.css'
 import { DashboardMenu } from './adminDashboard'
 import { Order } from '../order/order'

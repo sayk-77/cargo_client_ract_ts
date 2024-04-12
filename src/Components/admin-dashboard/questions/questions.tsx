@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// @ts-ignore
 import styles from './question.module.css'
 import { Search_pagination } from '../../search_pagination/search_pagination'
 import { QuestionCard } from './questionCard'
@@ -37,6 +36,10 @@ export const QuestionsUsers: React.FC = () => {
       <div className={styles.question_content}>
         <Search_pagination />
         <div className={styles.table_question}>
+          <div className={styles.filter}>
+            <p>Новые</p>
+            <p>Завершены</p>
+          </div>
           <table>
             <thead>
               <tr>

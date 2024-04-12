@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
-// @ts-ignore
 import styles from './changePassword.module.css'
 import axios from 'axios'
-// @ts-ignore
 import sprite from '../../sprite.svg'
 
 export const ChangePassword: React.FC = () => {

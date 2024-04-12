@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
-// @ts-ignore
+import React from 'react'
 import styles from './adminDashboard.module.css'
-// @ts-ignore
 import sprite from '../../../sprite.svg'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface DashboardMenuProps {
   activeMenuItem: string

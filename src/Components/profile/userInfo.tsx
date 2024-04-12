@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// @ts-ignore
 import styles from './userInfo.module.css'
 import axios, { AxiosError } from 'axios'
 import { useNavigate } from 'react-router-dom'

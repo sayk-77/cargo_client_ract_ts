@@ -1,5 +1,4 @@
 import React from 'react'
-// @ts-ignore
 import sprite from '../../../sprite.svg'
 
 interface CustomerCardProps {
