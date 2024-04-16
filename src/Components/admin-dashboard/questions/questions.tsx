@@ -10,10 +10,12 @@ interface Question {
   email: string
   numberPhone: string
   question: string
+  status: string
 }
 
 export const QuestionsUsers: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([])
+  const [filter, setFilter] = useState<string>('Новый')
 
   useEffect(() => {
     const getAllFeedback = async () => {
@@ -31,14 +33,33 @@ export const QuestionsUsers: React.FC = () => {
     getAllFeedback()
   }, [])
 
+  const filterItems = () => {
+    switch (filter) {
+      case 'Новый':
+        return questions.filter((questions) => questions.status === 'Новый')
+      case 'Обработан':
+        return questions.filter((questions) => questions.status === 'Обработан')
+      default:
+        return questions
+    }
+  }
+
   return (
     <div>
       <div className={styles.question_content}>
         <Search_pagination />
         <div className={styles.table_question}>
           <div className={styles.filter}>
-            <p>Новые</p>
-            <p>Завершены</p>
+            <p
+              className={filter === 'Новый' ? styles.activeFilter : ''}
+              onClick={() => setFilter('Новый')}>
+              Новые
+            </p>
+            <p
+              className={filter === 'Обработан' ? styles.activeFilter : ''}
+              onClick={() => setFilter('Обработан')}>
+              Обработаны
+            </p>
           </div>
           <table>
             <thead>
@@ -50,7 +71,7 @@ export const QuestionsUsers: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {questions.map((question) => (
+              {filterItems().map((question) => (
                 <QuestionCard key={question.ID} quest={question} />
               ))}
             </tbody>

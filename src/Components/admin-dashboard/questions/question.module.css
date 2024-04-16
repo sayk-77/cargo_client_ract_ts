@@ -44,4 +44,9 @@
 .filter > p {
   font-size: 20px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.activeFilter {
+  color: #0bd366;
 }
