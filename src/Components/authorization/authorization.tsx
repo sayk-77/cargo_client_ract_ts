@@ -77,12 +77,9 @@ export const Authorization: React.FC = () => {
             </button>
           </div>
         </form>
-        <div className={styles.create_profile}>
-          <p>Первый раз у нас?</p>
-          <Link to="/registration" style={{ textDecoration: 'none' }}>
-            {' '}
-            Регистрация
-          </Link>
+        <div className={styles.help}>
+          <Link to="/registration"> Регистрация</Link>
+          <Link to="/recovery">Забыли пароль?</Link>
         </div>
       </div>
     </section>

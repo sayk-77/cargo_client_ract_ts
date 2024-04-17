@@ -16,6 +16,7 @@ import { MakeOrder } from './Components/admin-dashboard/create_order/create_orde
 import { Dashboard } from './Components/admin-dashboard/dashboard/dashboard'
 import { Login } from './Components/admin-dashboard/login/login'
 import { QuestionDetail } from './Components/admin-dashboard/questions/questionDetail'
+import { Recovery } from './Components/recovery/recovery'
 
 export const Router: React.FC = () => {
   return (
@@ -38,6 +39,7 @@ export const Router: React.FC = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/login" element={<Login />} />
         <Route path="/solution-quest/:id" element={<QuestionDetail />} />
+        <Route path="/recovery" element={<Recovery />} />
       </Routes>
     </BrowserRouter>
   )

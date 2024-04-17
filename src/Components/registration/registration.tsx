@@ -171,7 +171,6 @@ export const Registration: React.FC = () => {
         </form>
 
         <div className={styles.create_profile}>
-          <p>Уже были у нас?</p>
           <Link to="/authorization" style={{ textDecoration: 'none' }}>
             {' '}
             Вход
