@@ -8,10 +8,6 @@ import { Registration } from './Components/registration/registration'
 import { About } from './Components/about/about'
 import { Profile } from './Components/profile/profile'
 import { CreateOrder } from './Components/createOrder/createOrder'
-import { Order } from './Components/admin-dashboard/order/order'
-import { Driver } from './Components/admin-dashboard/driver/driver'
-import { CarPark } from './Components/admin-dashboard/car_park/carPark'
-import { Customers } from './Components/admin-dashboard/customers/customers'
 import { MakeOrder } from './Components/admin-dashboard/create_order/create_order'
 import { Dashboard } from './Components/admin-dashboard/dashboard/dashboard'
 import { Login } from './Components/admin-dashboard/login/login'
@@ -31,11 +27,7 @@ export const Router: React.FC = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/create" element={<CreateOrder />} />
-        <Route path="/dashboard/order" element={<Order />} />
-        <Route path="/dashboard/driver" element={<Driver />} />
-        <Route path="/dashboard/car_park" element={<CarPark />} />
-        <Route path="/dashboard/customer" element={<Customers />} />
-        <Route path="/create-order" element={<MakeOrder />} />
+        <Route path="/create-order/:id" element={<MakeOrder />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/login" element={<Login />} />
         <Route path="/solution-quest/:id" element={<QuestionDetail />} />

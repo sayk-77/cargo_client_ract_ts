@@ -19,7 +19,7 @@ export const ProcessOrder: React.FC = () => {
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_SERVER_API_URL}/order/status`,
-          { status: 'Доставляется' },
+          { status: 'В процессе' },
           {
             headers: { Authorization: token },
           },

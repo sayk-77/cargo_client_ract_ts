@@ -3,6 +3,7 @@ import styles from './createOrder.module.css'
 import axios from 'axios'
 import { geocodeByAddresses } from '../../tools/getDistance'
 import { useNavigate } from 'react-router-dom'
+import { formatDateToYYYYMMDD } from '../../tools/formatDate'
 
 interface CargoType {
   ID: number
@@ -100,6 +101,7 @@ export const CreateOrder: React.FC = () => {
       sendingAddress: deliveryAddress,
       orderPrice: totalPrice,
       recipient: recipient,
+      createOrder: formatDateToYYYYMMDD(new Date()),
     }
 
     const response = await axios.post(

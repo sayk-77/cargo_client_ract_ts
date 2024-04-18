@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import sprite from '../../../sprite.svg'
+import Modal from './modalConfirm'
 
 interface Order {
   order: {
@@ -27,8 +28,14 @@ interface Order {
 
 export const ElementTable: React.FC<Order> = ({ order }) => {
   const navigate = useNavigate()
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   let content
+
+  const confirmOrder = (): void => {
+    console.log('Завершен')
+    setShowModal(false)
+  }
 
   if (order.status === 'Создан') {
     content = (
@@ -43,7 +50,7 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
             height={14}
             width={8}
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/create-order')}>
+            onClick={() => navigate(`/create-order/${order.ID}`)}>
             <use xlinkHref={sprite + '#arrow_detail'}></use>
           </svg>
         </td>
@@ -68,13 +75,11 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
         </td>
         <td>{order.recipient}</td>
         <td>
-          <svg
-            height={14}
-            width={8}
-            style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/create-order')}>
-            <use xlinkHref={sprite + '#arrow_detail'}></use>
-          </svg>
+          <button style={{ padding: '5px' }} onClick={() => setShowModal(true)}>
+            <svg height={13} width={18}>
+              <use xlinkHref={`${sprite}#ok`}></use>
+            </svg>
+          </button>
         </td>
       </tr>
     )
@@ -108,5 +113,16 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
     )
   }
 
-  return content
+  return (
+    <>
+      {content}
+      {
+        <Modal
+          showModal={showModal}
+          onClose={() => setShowModal(false)}
+          onConfirm={confirmOrder}
+        />
+      }
+    </>
+  )
 }

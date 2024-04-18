@@ -8,6 +8,7 @@ interface QuestionCardProops {
     name: string
     email: string
     numberPhone: string
+    status: string
     question: string
   }
 }
@@ -29,15 +30,17 @@ export const QuestionCard: React.FC<QuestionCardProops> = ({ quest }) => {
         }}>
         {quest.question}
       </td>
-      <td>
-        <svg
-          height={14}
-          width={8}
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate(`/solution-quest/${quest.ID}`)}>
-          <use xlinkHref={sprite + '#arrow_detail'}></use>
-        </svg>
-      </td>
+      {quest.status !== 'Обработан' && (
+        <td>
+          <svg
+            height={14}
+            width={8}
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate(`/solution-quest/${quest.ID}`)}>
+            <use xlinkHref={sprite + '#arrow_detail'}></use>
+          </svg>
+        </td>
+      )}
     </tr>
   )
 }

@@ -14,7 +14,7 @@ interface Order {
 }
 
 export const Order: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('new')
+  const [activeFilter, setActiveFilter] = useState('Создан')
   const navigate = useNavigate()
 
   const handleFilterClick = (filter: string) => {
@@ -31,38 +31,38 @@ export const Order: React.FC = () => {
         <div className={styles.order_filter}>
           <p
             className={
-              activeFilter === 'new'
+              activeFilter === 'Создан'
                 ? `${styles.filter_item} ${styles.active}`
                 : styles.filter_item
             }
-            onClick={() => handleFilterClick('new')}>
+            onClick={() => handleFilterClick('Создан')}>
             Новые
           </p>
           <p
             className={
-              activeFilter === 'inProgress'
+              activeFilter === 'В процессе'
                 ? `${styles.filter_item} ${styles.active}`
                 : styles.filter_item
             }
-            onClick={() => handleFilterClick('inProgress')}>
+            onClick={() => handleFilterClick('В процессе')}>
             В процессе
           </p>
           <p
             className={
-              activeFilter === 'completed'
+              activeFilter === 'Завершен'
                 ? `${styles.filter_item} ${styles.active}`
                 : styles.filter_item
             }
-            onClick={() => handleFilterClick('completed')}>
+            onClick={() => handleFilterClick('Завершен')}>
             Завершенные
           </p>
         </div>
         <button onClick={createOrder}>Создать</button>
       </div>
 
-      {activeFilter === 'new' && <NewOrder />}
-      {activeFilter === 'inProgress' && <ProcessOrder />}
-      {activeFilter === 'completed' && <CompletedOrder />}
+      {activeFilter === 'Создан' && <NewOrder />}
+      {activeFilter === 'В процессе' && <ProcessOrder />}
+      {activeFilter === 'Завершен' && <CompletedOrder />}
     </div>
   )
 }
