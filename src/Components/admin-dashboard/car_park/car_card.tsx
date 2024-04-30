@@ -10,6 +10,7 @@ interface CarCardProps {
     color: string
     mileage: string
     technicalStatus: string
+    imageUrl: string
   }
 }
 
@@ -19,7 +20,14 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <p className={styles.car_model}>
         {car.brend} {car.model}
       </p>
-      <img src="/assets/car_mers.png" alt="" />
+      <img
+        className={styles.imageCar}
+        width={300}
+        height={200}
+        style={{ borderRadius: '10px' }}
+        src={`${import.meta.env.VITE_SERVER_API_URL}/${car.imageUrl}`}
+        alt="Car Image"
+      />
       <div className={styles.car_detail}>
         <ul>
           <li>Дата выпуска:</li>

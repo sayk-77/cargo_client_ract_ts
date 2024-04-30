@@ -1,31 +1,44 @@
 .order_container {
-    margin: 50px 0;
-
+  margin: 50px 0;
 }
 
 .order_filter {
-    display: flex;
-    gap: 30px;
+  display: flex;
+  gap: 30px;
 }
 
 .order_filter > p {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .filter {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
 }
 
 .filter > button {
-    padding: 5px 10px;;
+  padding: 5px 10px;
 }
 
 .filter_item {
-    cursor: pointer;
-    transition: color 0.3s ease;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .active {
-    color: #0bd366;
+  color: #0bd366;
+}
+
+@media screen and (max-width: 1000px) {
+  .filter {
+    display: block;
+    gap: 20px;
+    margin-left: 20px;
+  }
+  .order_filter > p {
+    font-size: 16px;
+  }
+  .orderCreateBtn {
+    display: none;
+  }
 }

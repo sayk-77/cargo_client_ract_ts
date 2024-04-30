@@ -4,6 +4,7 @@ import axios from 'axios'
 import { geocodeByAddresses } from '../../tools/getDistance'
 import { useNavigate } from 'react-router-dom'
 import { formatDateToYYYYMMDD } from '../../tools/formatDate'
+import { BurgerDashBoard } from '../profile/burgerDashBoard'
 
 interface CargoType {
   ID: number
@@ -203,6 +204,7 @@ export const CreateOrder: React.FC = () => {
           Оформить заказ
         </button>
       </form>
+      <BurgerDashBoard />
     </div>
   )
 }

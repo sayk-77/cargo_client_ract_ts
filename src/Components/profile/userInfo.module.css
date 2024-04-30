@@ -1,50 +1,54 @@
 .userInfo {
-    margin: 50px auto;
-    padding: 20px 0;
-    border-radius: 8px;
-    width: 50%;
-    height: 390px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-    text-align: center;
+  margin: 50px auto;
+  padding: 20px 0;
+  border-radius: 8px;
+  width: 50%;
+  height: 390px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .userInfo > h3 {
-    font-size: 18px;
-    padding-bottom: 20px;
+  font-size: 18px;
+  padding-bottom: 20px;
 }
 
 .userInfo > img {
-    padding-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 .info_blocks {
-    display: flex;
-    gap: 20px;
-    padding: 0 50px;
-    justify-content: space-between;
+  display: flex;
+  gap: 20px;
+  padding: 0 50px;
+  justify-content: space-between;
 }
 
 .info_block:first-child > p {
-    font-weight: 600;
-    font-size: 18px;
-    text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: left;
 }
 
 .info_block:last-child {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .info_block {
-    display: flex;
-    gap: 10px;
-    text-align: start;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  gap: 10px;
+  text-align: start;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 1000px) {
-    .userInfo {
-        width: 80%;
-        margin: 20px auto;
-    }
+  .userInfo {
+    width: 80%;
+    margin: 20px auto;
+  }
+  .info_block:first-child > p,
+  .info_block > p {
+    font-size: 14px;
+  }
 }

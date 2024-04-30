@@ -12,6 +12,7 @@ interface Car {
   color: string
   mileage: string
   technicalStatus: string
+  imageUrl: string
 }
 
 export const CarPark: React.FC = () => {
@@ -25,6 +26,7 @@ export const CarPark: React.FC = () => {
         )
         if (response.status === 200) {
           setCars(response?.data)
+          console.log(response.data)
         }
       } catch (er) {
         console.log(er)

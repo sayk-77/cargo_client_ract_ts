@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './setting.module.css'
 import { PersonalData } from './personalData'
 import { ChangePassword } from './changePassword'
+import { BurgerDashBoard } from '../profile/burgerDashBoard'
 
 export const Setting: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ export const Setting: React.FC = () => {
         <PersonalData />
         <ChangePassword />
       </div>
+      <BurgerDashBoard />
     </section>
   )
 }

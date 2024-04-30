@@ -4,6 +4,7 @@ import { NewOrder } from './newOrder'
 import { ProcessOrder } from './processOrder'
 import { CompletedOrder } from './completedOrder'
 import { useNavigate } from 'react-router-dom'
+import { BurgerDashBoard } from '../profile/burgerDashBoard'
 
 interface Order {
   ID: number
@@ -57,12 +58,15 @@ export const Order: React.FC = () => {
             Завершенные
           </p>
         </div>
-        <button onClick={createOrder}>Создать</button>
+        <button className={styles.orderCreateBtn} onClick={createOrder}>
+          Создать
+        </button>
       </div>
 
       {activeFilter === 'Создан' && <NewOrder />}
       {activeFilter === 'В процессе' && <ProcessOrder />}
       {activeFilter === 'Завершен' && <CompletedOrder />}
+      <BurgerDashBoard />
     </div>
   )
 }

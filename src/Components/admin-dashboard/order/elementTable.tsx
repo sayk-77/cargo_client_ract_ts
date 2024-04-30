@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import sprite from '../../../sprite.svg'
 import Modal from './modalConfirm'
+import axios from 'axios'
 
 interface Order {
   order: {
@@ -32,8 +33,17 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
 
   let content
 
-  const confirmOrder = (): void => {
-    console.log('Завершен')
+  const confirmOrder = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_API_URL}/order/complete/${order.ID}`,
+      )
+      if (response.status === 200) {
+        console.log(response.data)
+      }
+    } catch (er) {
+      console.log(er)
+    }
     setShowModal(false)
   }
 
@@ -59,14 +69,7 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
   } else if (order.status === 'В процессе') {
     content = (
       <tr>
-        <td
-          style={{
-            color: '#000',
-            fontSize: '15px',
-            fontWeight: '600',
-          }}>
-          {order.ID}
-        </td>
+        <td>{order.ID}</td>
         <td>{order.destinationAddress}</td>
         <td>{order.sendingAddress}</td>
         <td>{order.orderPrice}</td>
@@ -86,14 +89,7 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
   } else {
     content = (
       <tr>
-        <td
-          style={{
-            color: '#000',
-            fontSize: '15px',
-            fontWeight: '600',
-          }}>
-          {order.ID}
-        </td>
+        <td>{order.ID}</td>
         <td>
           {order.Client.firstName} {order.Client.lastName}
         </td>

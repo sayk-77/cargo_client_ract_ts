@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { push as Menu } from 'react-burger-menu'
 import sprite from '../../sprite.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './profileDashBoard.module.css'
 
 interface ExampleProps {}
 
 export const BurgerDashBoard: React.FC<ExampleProps> = () => {
   const [isOrdersOpen, setOrdersOpen] = useState(false)
+  const navigate = useNavigate()
 
   const toggleOrders = () => {
     setOrdersOpen(!isOrdersOpen)
@@ -15,6 +16,11 @@ export const BurgerDashBoard: React.FC<ExampleProps> = () => {
 
   const closeMenu = () => {
     setOrdersOpen(false)
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    navigate('/')
   }
 
   return (
@@ -57,14 +63,8 @@ export const BurgerDashBoard: React.FC<ExampleProps> = () => {
                 <Link to="/order/create" onClick={closeMenu}>
                   Создать заказ
                 </Link>
-                <Link to="/order/new" onClick={closeMenu}>
-                  Новые
-                </Link>
-                <Link to="/order/process" onClick={closeMenu}>
-                  В процессе
-                </Link>
-                <Link to="/order/completed" onClick={closeMenu}>
-                  Завершенные
+                <Link to="/order" onClick={closeMenu}>
+                  Мои заказы
                 </Link>
               </div>
             )}
@@ -75,6 +75,14 @@ export const BurgerDashBoard: React.FC<ExampleProps> = () => {
             </svg>
             <Link to="/setting" onClick={closeMenu}>
               Настройки
+            </Link>
+          </div>
+          <div className={styles.panel_link} onClick={logout}>
+            <svg height={25} width={25}>
+              <use xlinkHref={sprite + '#dashboard_logout'}></use>
+            </svg>
+            <Link to="/setting" onClick={closeMenu}>
+              Выйти
             </Link>
           </div>
         </div>

@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './login.module.css'
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    setError('123')
+    console.log(email)
+    console.log(password)
+  }, [])
 
   return (
     <div className={styles.login}>
