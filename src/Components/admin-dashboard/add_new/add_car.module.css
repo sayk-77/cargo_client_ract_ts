@@ -1,0 +1,70 @@
+.inputContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-top: 60px;
+  gap: 20px;
+}
+
+.inputLabel {
+  font-weight: bold;
+}
+
+.inputField {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.fileInput {
+  position: absolute;
+  width: 34%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  position: relative;
+}
+
+.customFileInput {
+  padding: 8px 12px;
+  cursor: pointer !important;
+  border: none;
+  width: 34%;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #0bd366;
+}
+
+.customFileInput:hover {
+  background-color: #079245;
+}
+
+.fileInputContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submitButton {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0bd366;
+  color: white;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0aa04d;
+}

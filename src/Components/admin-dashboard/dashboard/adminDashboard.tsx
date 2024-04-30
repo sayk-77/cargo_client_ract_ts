@@ -80,6 +80,16 @@ export const DashboardMenu: React.FC<DashboardMenuProps> = ({
           </span>
         </li>
         <li>
+          <svg height={25} width={25}>
+            <use xlinkHref={`${sprite}#addNew`}></use>
+          </svg>
+          <span
+            className={activeMenuItem === 'addNew' ? styles.active : ''}
+            onClick={() => handleClick('addNew')}>
+            Добавить
+          </span>
+        </li>
+        <li>
           <a style={{ cursor: 'pointer' }} onClick={logout}>
             <svg height={25} width={25}>
               <use xlinkHref={sprite + '#dashboard_logout'}></use>

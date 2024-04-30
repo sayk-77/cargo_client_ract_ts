@@ -1,0 +1,15 @@
+.select_item {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+.select_item > p {
+  font-size: 24px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.active {
+  color: #0bd366;
+}
