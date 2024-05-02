@@ -21,12 +21,9 @@ export const CarPark: React.FC = () => {
   useEffect(() => {
     const getAllCar = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/car/all`,
-        )
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/car/all`)
         if (response.status === 200) {
           setCars(response?.data)
-          console.log(response.data)
         }
       } catch (er) {
         console.log(er)
