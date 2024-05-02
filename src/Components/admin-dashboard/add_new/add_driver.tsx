@@ -17,21 +17,18 @@ export const AddDriver: React.FC = () => {
   const [lastName, setLastName] = useState<string>('')
   const [licenseNumber, setLicenseNumber] = useState<string>('')
   const [transportationCert, setTransportationCert] = useState<number>(0)
-  const [transportationCertDate, setTransportationCertDate] =
-    useState<string>('')
+  const [transportationCertDate, setTransportationCertDate] = useState<string>('')
   const [carId, setCarId] = useState<number>(0)
   const [freeCars, setFreeCars] = useState<Car[]>([])
-  const [selectedCar, setSelectedCar] =
-    useState<ValueType<{ value: string; label: string }>>(null)
+  const [selectedCar, setSelectedCar] = useState<ValueType<{ value: string; label: string }>>(null)
+  const [filteredCars, setFilteredCars] = useState<Car[]>([])
 
   useEffect(() => {
     const getFreeCar = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/car/free`,
-        )
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/car/free`)
         if (response.status === 200) {
-          setFreeCars(response.data)
+          setFilteredCars(response.data)
         }
       } catch (error) {
         console.log(error)
@@ -52,7 +49,9 @@ export const AddDriver: React.FC = () => {
       border: 'none',
       boxShadow: 'nonde',
       backgroundColor: '#f6f6f6',
-      width: '100%',
+      minWidth: '440px',
+      maxWidth: '440px',
+      height: '41px',
     }),
     singleValue: (defaultStyles: any) => ({ ...defaultStyles, color: '#000' }),
   }
@@ -74,18 +73,14 @@ export const AddDriver: React.FC = () => {
           onChange={(e) => setLastName(e.target.value)}
         />
 
-        <label className={styles.inputLabel}>
-          Номер автомобильного удостоверения:
-        </label>
+        <label className={styles.inputLabel}>Номер автомобильного удостоверения:</label>
         <input
           type="text"
           className={styles.inputField}
           onChange={(e) => setLicenseNumber(e.target.value)}
         />
 
-        <label className={styles.inputLabel}>
-          Номер сертификата на перевозки:
-        </label>
+        <label className={styles.inputLabel}>Номер сертификата на перевозки:</label>
         <input
           type="text"
           className={styles.inputField}
@@ -101,7 +96,7 @@ export const AddDriver: React.FC = () => {
 
         <label className={styles.inputLabel}>Автомобиль:</label>
         <Select
-          options={freeCars.map((car) => ({
+          options={filteredCars.map((car) => ({
             value: `${car.ID}`,
             label: `${car.brend} ${car.model} ${car.year}`,
           }))}

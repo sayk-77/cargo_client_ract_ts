@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 // @ts-ignore
 import Select, { ValueType } from 'react-select'
+import { toast } from 'react-toastify'
 
 interface Order {
   ID: number
@@ -47,9 +48,7 @@ export const MakeOrder: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const orderResponse = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/order/${id}`,
-        )
+        const orderResponse = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/order/${id}`)
         if (orderResponse.status === 200) {
           setOrder(orderResponse.data)
         }
@@ -93,8 +92,7 @@ export const MakeOrder: React.FC = () => {
       arriveDate: arriveDate,
       driverId: selectedDriver ? parseInt(selectedDriver.value) : null,
       carId: selectedDriver
-        ? drivers.find((driver) => driver.ID === parseInt(selectedDriver.value))
-            ?.Car.ID
+        ? drivers.find((driver) => driver.ID === parseInt(selectedDriver.value))?.Car.ID
         : null,
       expiryDate: '',
       clientId: order?.Client.ID,
@@ -106,7 +104,7 @@ export const MakeOrder: React.FC = () => {
         data,
       )
       if (response.status === 200) {
-        console.log(response.data)
+        toast.success('Заказ успешно подтвержден!')
         navigate('/dashboard')
       }
     } catch (err) {
@@ -206,9 +204,7 @@ export const MakeOrder: React.FC = () => {
           </div>
         </div>
         <div className={styles.order_btn}>
-          <button
-            className={styles.make_cancel}
-            onClick={() => navigate('/dashboard')}>
+          <button className={styles.make_cancel} onClick={() => navigate('/dashboard')}>
             Отмена
           </button>
           <button className={styles.make_ok} onClick={sendOrder}>

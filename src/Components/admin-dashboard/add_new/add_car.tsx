@@ -11,7 +11,6 @@ export const AddCar: React.FC = () => {
 
   const addCar = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Отправлено:', { brand, model, color, mileage, condition })
   }
 
   const fileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

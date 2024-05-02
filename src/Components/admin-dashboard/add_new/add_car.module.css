@@ -68,3 +68,9 @@
 .submitButton:hover {
   background-color: #0aa04d;
 }
+
+.inputField[type='number']::-webkit-inner-spin-button,
+.inputField[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
