@@ -1,0 +1,30 @@
+.paginationBttns {
+  display: flex;
+  list-style: none;
+  justify-content: end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.paginationBttns li {
+  margin: 0 8px;
+}
+
+.previousBttn,
+.nextBttn {
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.paginationActive > a {
+  color: #0bd366;
+  font-weight: 600;
+}
+
+.paginationDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

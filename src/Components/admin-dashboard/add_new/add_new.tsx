@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styles from './add_new.module.css'
-import { Search_pagination } from '../../search_pagination/search_pagination'
 import { AddCar } from './add_car'
 import { AddDriver } from './add_driver'
 import { AddEmployes } from './add_employes'
@@ -14,12 +13,9 @@ export const AddNew: React.FC = () => {
   }
 
   return (
-    <section>
-      <Search_pagination />
+    <section className={styles.container}>
       <div className={styles.select_item}>
-        <p
-          onClick={() => changeActiveItem('Авто')}
-          className={activeItem === 'Авто' ? styles.active : ''}>
+        <p onClick={() => changeActiveItem('Авто')} className={activeItem === 'Авто' ? styles.active : ''}>
           Авто
         </p>
         <p
@@ -32,9 +28,7 @@ export const AddNew: React.FC = () => {
           className={activeItem === 'Сотрудник' ? styles.active : ''}>
           Сотрудник
         </p>
-        <p
-          onClick={() => changeActiveItem('Заказ')}
-          className={activeItem === 'Заказ' ? styles.active : ''}>
+        <p onClick={() => changeActiveItem('Заказ')} className={activeItem === 'Заказ' ? styles.active : ''}>
           Заказ
         </p>
       </div>

@@ -102,6 +102,13 @@ export const AddCar: React.FC = () => {
           onChange={(e) => setMileage(Number(e.target.value))}
         />
 
+        <label className={styles.inputLabel}>Год выпуска:</label>
+        <input
+          type="number"
+          className={styles.inputField}
+          onChange={(e) => setYear(Number(e.target.value))}
+        />
+
         <label className={styles.inputLabel}>Техническое состояние:</label>
         <Select
           options={technicalCondition.map((condition) => ({

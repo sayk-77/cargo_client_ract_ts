@@ -1,54 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 .order_container {
-    display: flex;
+  display: block;
+  margin: 0 auto;
 }
 
 .table_order {
-    width: 900px;
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .filter {
-    display: flex;
-    gap: 20px;
-    padding-bottom: 15px;
+  display: flex;
+  gap: 20px;
+  padding-bottom: 15px;
 }
 
 .filter > p {
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .5s;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .active_filter {
-    color: #0bd366;
+  color: #0bd366;
 }
 
 .table_order table {
-    max-width: 900px;
-    border: 1px solid #AEAEAE;
-    border-radius: 10px;
-    padding: 50px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -khtml-border-radius: 10px;
+  min-width: 900px;
+  border: 1px solid #aeaeae;
+  border-radius: 10px;
+  padding: 30px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
 }
 
-.table_order th, .table_order td {
-    padding: 8px;
-    text-align: left;
-    font-size: 13px;
-    text-align: center;
-    color: #7D7D7D;
-    padding: 20px 30px;
+.table_order th,
+.table_order td {
+  padding: 8px;
+  text-align: left;
+  font-size: 13px;
+  text-align: center;
+  color: #7d7d7d;
+  padding: 20px 30px;
 }
 
 .table_order th {
-    text-align: center;
-    font-weight: bold;
-    color: #7D7D7D;
-    font-size: 14px;    
-    padding-bottom: 50px;
+  text-align: center;
+  font-weight: bold;
+  color: #7d7d7d;
+  font-size: 14px;
+  padding-bottom: 50px;
 }

@@ -3,6 +3,7 @@ import styles from './question.module.css'
 import { Search_pagination } from '../../search_pagination/search_pagination'
 import { QuestionCard } from './questionCard'
 import axios from 'axios'
+import { Pagination } from '../../pagination/pagination'
 
 interface Question {
   ID: number
@@ -16,13 +17,13 @@ interface Question {
 export const QuestionsUsers: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([])
   const [filter, setFilter] = useState<string>('Новый')
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const itemsPerPage = 5
 
   useEffect(() => {
     const getAllFeedback = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/feedback/all`,
-        )
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/feedback/all`)
         if (response.status === 200) {
           setQuestions(response?.data)
         }
@@ -44,39 +45,47 @@ export const QuestionsUsers: React.FC = () => {
     }
   }
 
+  const totalItems = filterItems().length
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentQuestions = questions.slice(startIndex, endIndex)
+
+  const changePage = (selected: number) => {
+    setCurrentPage(selected + 1)
+  }
+
   return (
-    <div>
-      <div className={styles.question_content}>
-        <Search_pagination />
-        <div className={styles.table_question}>
-          <div className={styles.filter}>
-            <p
-              className={filter === 'Новый' ? styles.activeFilter : ''}
-              onClick={() => setFilter('Новый')}>
-              Новые
-            </p>
-            <p
-              className={filter === 'Обработан' ? styles.activeFilter : ''}
-              onClick={() => setFilter('Обработан')}>
-              Обработаны
-            </p>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Номер вопроса</th>
-                <th>Имя</th>
-                <th>Номер телефона</th>
-                <th>Вопрос</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filterItems().map((question) => (
-                <QuestionCard key={question.ID} quest={question} />
-              ))}
-            </tbody>
-          </table>
+    <div className={styles.question_content}>
+      {totalPages >= 2 && (
+        <Pagination pageChange={changePage} pageCount={totalPages} currentPage={currentPage} />
+      )}
+      <div className={styles.table_question}>
+        <div className={styles.filter}>
+          <p className={filter === 'Новый' ? styles.activeFilter : ''} onClick={() => setFilter('Новый')}>
+            Новые
+          </p>
+          <p
+            className={filter === 'Обработан' ? styles.activeFilter : ''}
+            onClick={() => setFilter('Обработан')}>
+            Обработаны
+          </p>
         </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Номер вопроса</th>
+              <th>Имя</th>
+              <th>Номер телефона</th>
+              <th>Вопрос</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filterItems().map((question) => (
+              <QuestionCard key={question.ID} quest={question} />
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   )

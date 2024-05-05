@@ -1,5 +1,6 @@
-.question_container {
-  display: flex;
+.question_content {
+  display: block;
+  margin: 0 auto;
 }
 
 .table_question {

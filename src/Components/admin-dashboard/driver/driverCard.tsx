@@ -17,8 +17,8 @@ export const DriverCard: React.FC<DriverProps> = ({ driver }) => {
       <td>
         {driver.firstName} {driver.lastName}
       </td>
-      <td>{driver.licenseNumber}</td>
       <td>{driver.transportationCert}</td>
+      <td>{driver.licenseNumber}</td>
       <td>
         <svg height={14} width={8} style={{ cursor: 'pointer' }}>
           <use xlinkHref={sprite + '#arrow_detail'}></use>

@@ -1,10 +1,20 @@
-.car_park_container {
-  display: flex;
-  margin-left: 30px;
+.car_cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
 }
 
-.car_cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+.car_park_container {
+  margin: 0 auto;
+}
+
+.car_card {
+  height: 300px;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .car_cards {
+    grid-template-columns: 1fr;
+  }
 }

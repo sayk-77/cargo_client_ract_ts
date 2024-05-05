@@ -12,9 +12,7 @@ export const Search_pagination: React.FC = () => {
       <div className={styles.pagination}>
         <ul>
           <li>
-            <a
-              href="#"
-              className={`${styles.pagination__item} ${styles.pagination__item__active}`}>
+            <a href="#" className={`${styles.pagination__item} ${styles.pagination__item__active}`}>
               1
             </a>
           </li>

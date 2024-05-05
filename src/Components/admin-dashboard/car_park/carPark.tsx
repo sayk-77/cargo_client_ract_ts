@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styles from './carPark.module.css'
-import { Search_pagination } from '../../search_pagination/search_pagination'
 import { CarCard } from './car_card'
 import axios from 'axios'
+import { Pagination } from '../../pagination/pagination'
 
 interface Car {
   ID: number
@@ -17,6 +17,8 @@ interface Car {
 
 export const CarPark: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([])
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const itemsPerPage = 4
 
   useEffect(() => {
     const getAllCar = async () => {
@@ -32,12 +34,24 @@ export const CarPark: React.FC = () => {
     getAllCar()
   }, [])
 
+  const totalItems = cars.length
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentCars = cars.slice(startIndex, endIndex)
+
+  const changePage = (selected: number) => {
+    setCurrentPage(selected + 1)
+  }
+
   return (
     <div className={styles.car_park_container}>
+      {totalPages >= 2 && (
+        <Pagination currentPage={currentPage} pageCount={totalPages} pageChange={changePage} />
+      )}
       <div className={styles.car_park_content}>
-        <Search_pagination />
         <div className={styles.car_cards}>
-          {cars.map((car) => (
+          {currentCars.map((car) => (
             <CarCard key={car.ID} car={car} />
           ))}
         </div>

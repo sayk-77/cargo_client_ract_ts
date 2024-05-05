@@ -13,3 +13,7 @@
 .active {
   color: #0bd366;
 }
+
+.container {
+  margin: 0 auto;
+}
