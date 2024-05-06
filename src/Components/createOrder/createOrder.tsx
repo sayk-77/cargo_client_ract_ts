@@ -5,6 +5,7 @@ import { geocodeByAddresses } from '../../tools/getDistance'
 import { useNavigate } from 'react-router-dom'
 import { formatDateToYYYYMMDD } from '../../tools/formatDate'
 import { BurgerDashBoard } from '../profile/burgerDashBoard'
+import { checkAuth } from '../../tools/checkAuth'
 
 interface CargoType {
   ID: number
@@ -32,9 +33,7 @@ export const CreateOrder: React.FC = () => {
     try {
       const result = await geocodeByAddresses(arrayAddress)
       if (result === undefined) {
-        setErrorAddress(
-          'Не верный формат адреса! Пример: Москва, ул.Победы, д.32',
-        )
+        setErrorAddress('Не верный формат адреса! Пример: Москва, ул.Победы, д.32')
         return
       }
       setDistance(result)
@@ -48,16 +47,11 @@ export const CreateOrder: React.FC = () => {
     const basePriceWeightKg: number = 2
     const baseSizePrice: number = 1.5
 
-    const selectedType = cargoType.find(
-      (type) => type.typeName === selectedCargoType,
-    )
+    const selectedType = cargoType.find((type) => type.typeName === selectedCargoType)
 
     if (selectedType && distance !== undefined) {
       const result =
-        (basePriceDelivery +
-          weight * basePriceWeightKg +
-          size * baseSizePrice +
-          distance * basePriceKm) *
+        (basePriceDelivery + weight * basePriceWeightKg + size * baseSizePrice + distance * basePriceKm) *
         selectedType?.PriceCoeff
       setTotalPrice(Math.round(result))
       setErrorPrice('')
@@ -66,20 +60,21 @@ export const CreateOrder: React.FC = () => {
 
   const token = localStorage.getItem('token')
 
+  const getAllCargoType = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/cargo_type/all`, {
+        headers: { Authorization: token },
+      })
+      const data = await response.data
+      setCargoType(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
-    const getAllCargoType = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/cargo_type/all`,
-          {
-            headers: { Authorization: token },
-          },
-        )
-        const data = await response.data
-        setCargoType(data)
-      } catch (err) {
-        console.log(err)
-      }
+    if (!checkAuth()) {
+      navigate('/authorization')
     }
     getAllCargoType()
   }, [])
@@ -92,9 +87,7 @@ export const CreateOrder: React.FC = () => {
       return
     }
 
-    const selectedType = cargoType.find(
-      (type) => type.typeName === selectedCargoType,
-    )
+    const selectedType = cargoType.find((type) => type.typeName === selectedCargoType)
 
     const orderData = {
       cargoTypeId: selectedType?.ID,
@@ -105,13 +98,9 @@ export const CreateOrder: React.FC = () => {
       createOrder: formatDateToYYYYMMDD(new Date()),
     }
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_SERVER_API_URL}/order/add`,
-      orderData,
-      {
-        headers: { Authorization: token },
-      },
-    )
+    const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/order/add`, orderData, {
+      headers: { Authorization: token },
+    })
 
     if (response.status == 200) {
       navigate('/profile')
@@ -158,9 +147,7 @@ export const CreateOrder: React.FC = () => {
         </label>
         <label className={styles.orderLabel}>
           Тип груза:
-          <select
-            value={selectedCargoType}
-            onChange={(e) => setSelectedCargoType(e.target.value)}>
+          <select value={selectedCargoType} onChange={(e) => setSelectedCargoType(e.target.value)}>
             {cargoType.map((type) => (
               <option key={type.ID} value={type.typeName}>
                 {type.typeName}
@@ -190,11 +177,7 @@ export const CreateOrder: React.FC = () => {
         </label>
         <div className={styles.price_container}>
           <h3>Стоимость заказа:</h3>
-          <p>
-            {totalPrice !== null
-              ? `${totalPrice} рублей`
-              : 'Цена не рассчитана'}
-          </p>
+          <p>{totalPrice !== null ? `${totalPrice} рублей` : 'Цена не рассчитана'}</p>
           <button type="button" onClick={calculatePrice}>
             Рассчитать цену
           </button>

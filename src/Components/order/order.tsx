@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './order.module.css'
 import { NewOrder } from './newOrder'
 import { ProcessOrder } from './processOrder'
 import { CompletedOrder } from './completedOrder'
 import { useNavigate } from 'react-router-dom'
 import { BurgerDashBoard } from '../profile/burgerDashBoard'
+import { checkAuth } from '../../tools/checkAuth'
 
 interface Order {
   ID: number
@@ -22,6 +23,12 @@ export const Order: React.FC = () => {
     setActiveFilter(filter)
   }
 
+  useEffect(() => {
+    if (!checkAuth()) {
+      navigate('/authorization')
+    }
+  }, [])
+
   const createOrder = (): void => {
     navigate('/create')
   }
@@ -32,27 +39,21 @@ export const Order: React.FC = () => {
         <div className={styles.order_filter}>
           <p
             className={
-              activeFilter === 'Создан'
-                ? `${styles.filter_item} ${styles.active}`
-                : styles.filter_item
+              activeFilter === 'Создан' ? `${styles.filter_item} ${styles.active}` : styles.filter_item
             }
             onClick={() => handleFilterClick('Создан')}>
             Новые
           </p>
           <p
             className={
-              activeFilter === 'В процессе'
-                ? `${styles.filter_item} ${styles.active}`
-                : styles.filter_item
+              activeFilter === 'В процессе' ? `${styles.filter_item} ${styles.active}` : styles.filter_item
             }
             onClick={() => handleFilterClick('В процессе')}>
             В процессе
           </p>
           <p
             className={
-              activeFilter === 'Завершен'
-                ? `${styles.filter_item} ${styles.active}`
-                : styles.filter_item
+              activeFilter === 'Завершен' ? `${styles.filter_item} ${styles.active}` : styles.filter_item
             }
             onClick={() => handleFilterClick('Завершен')}>
             Завершенные

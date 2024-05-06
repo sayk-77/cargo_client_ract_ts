@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './QuestionDetail.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { checkRole } from '../../../tools/checkRole'
 
 interface Question {
   ID: number
@@ -18,11 +19,13 @@ export const QuestionDetail: React.FC = () => {
   const [feedback, setFeedback] = useState<Question>()
 
   useEffect(() => {
+    const role = checkRole()
+    if (!role) {
+      navigate('/')
+    }
     const getFeedbackById = async (id: string) => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/feedback/${id}`,
-        )
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/feedback/${id}`)
         if (response.status === 200) {
           setFeedback(response?.data)
         }
@@ -50,10 +53,7 @@ export const QuestionDetail: React.FC = () => {
         solution: solution,
       }
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_API_URL}/send-mail`,
-        data,
-      )
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/send-mail`, data)
 
       if (response.status === 200) {
         const responseUpdateStatus = await axios.put(
@@ -95,9 +95,7 @@ export const QuestionDetail: React.FC = () => {
               <label htmlFor="answer">Ответ на вопрос:</label>
               <textarea id="answer" name="answer" required />
               <div className={styles.action}>
-                <button
-                  className={styles.cancel}
-                  onClick={() => navigate('/dashboard')}>
+                <button className={styles.cancel} onClick={() => navigate('/dashboard')}>
                   Назад
                 </button>
                 <button type="submit">Отправить</button>

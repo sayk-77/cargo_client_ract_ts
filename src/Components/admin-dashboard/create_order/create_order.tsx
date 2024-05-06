@@ -6,6 +6,7 @@ import axios from 'axios'
 // @ts-ignore
 import Select, { ValueType } from 'react-select'
 import { toast } from 'react-toastify'
+import { checkRole } from '../../../tools/checkRole'
 
 interface Order {
   ID: number
@@ -42,8 +43,14 @@ export const MakeOrder: React.FC = () => {
   const [deliveryDate, setDeliveryDate] = useState<string>('')
   const [sendDate, setSendDate] = useState<string>('')
   const [arriveDate, setArriveSend] = useState<string>('')
-  const [selectedDriver, setSelectedDriver] =
-    useState<ValueType<{ value: string; label: string }>>(null)
+  const [selectedDriver, setSelectedDriver] = useState<ValueType<{ value: string; label: string }>>(null)
+
+  useEffect(() => {
+    const role = checkRole()
+    if (role === undefined) {
+      navigate('/dashboard/login')
+    }
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,9 +60,7 @@ export const MakeOrder: React.FC = () => {
           setOrder(orderResponse.data)
         }
 
-        const driversResponse = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/driver/free`,
-        )
+        const driversResponse = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/driver/free`)
         if (driversResponse.status === 200) {
           setDrivers(driversResponse.data)
         }
@@ -99,10 +104,7 @@ export const MakeOrder: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_API_URL}/order/confirm`,
-        data,
-      )
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/order/confirm`, data)
       if (response.status === 200) {
         toast.success('Заказ успешно подтвержден!')
         navigate('/dashboard')

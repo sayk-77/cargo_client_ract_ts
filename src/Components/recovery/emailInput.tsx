@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from './recovery.module.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface EmailInputProps {
   nextStep: (newStep: 'email' | 'code' | 'change', email: string) => void
@@ -8,6 +9,7 @@ interface EmailInputProps {
 
 export const EmailInput: React.FC<EmailInputProps> = ({ nextStep }) => {
   const [email, setEmail] = useState<string>('')
+  const navigate = useNavigate()
 
   const sendForm = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -16,10 +18,7 @@ export const EmailInput: React.FC<EmailInputProps> = ({ nextStep }) => {
       email: email,
     }
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_API_URL}/password/email`,
-        data,
-      )
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/password/email`, data)
       if (response.status === 200) {
         nextStep('code', email)
       }
@@ -33,9 +32,7 @@ export const EmailInput: React.FC<EmailInputProps> = ({ nextStep }) => {
       <div className={styles.main}>
         <h1 className={styles.title}>Востановление пароля</h1>
         <form onSubmit={sendForm}>
-          <p className={styles.subtitle}>
-            Введите почту от существующего аккаунта
-          </p>
+          <p className={styles.subtitle}>Введите почту от существующего аккаунта</p>
           <label className={styles.label} htmlFor="first">
             Почта:
           </label>
@@ -51,6 +48,10 @@ export const EmailInput: React.FC<EmailInputProps> = ({ nextStep }) => {
             required
           />
           <div className={styles.wrap}>
+            <button onClick={() => navigate('/')} className={styles.cancel}>
+              Назад
+            </button>
+
             <button className={styles.send} type="submit">
               Далее
             </button>
