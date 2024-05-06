@@ -24,13 +24,14 @@ interface Order {
 
 interface BodyTableProps {
   orders: Order[]
+  updateOrder: () => void
 }
 
-export const BodyTable: React.FC<BodyTableProps> = ({ orders }) => {
+export const BodyTable: React.FC<BodyTableProps> = ({ orders, updateOrder }) => {
   return (
     <tbody className={styles.element}>
       {orders.map((order: Order) => (
-        <ElementTable key={order.ID} order={order} status={order.status} />
+        <ElementTable key={order.ID} order={order} status={order.status} updateOrder={updateOrder} />
       ))}
     </tbody>
   )

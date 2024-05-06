@@ -25,15 +25,16 @@ interface Order {
 interface TableProps {
   status: string
   orders: Order[]
+  updateOrder: () => void
 }
 
-export const TableOrder: React.FC<TableProps> = ({ status, orders }) => {
+export const TableOrder: React.FC<TableProps> = ({ status, orders, updateOrder }) => {
   const filteredOrders = orders.filter((order) => order.status === status)
 
   return (
     <table style={{ maxWidth: '90px' }}>
       <HeaderTable status={status} />
-      <BodyTable orders={filteredOrders} />
+      <BodyTable orders={filteredOrders} updateOrder={updateOrder} />
     </table>
   )
 }

@@ -37,8 +37,8 @@ export const HeaderTable: React.FC<headerTableProps> = ({ status }) => {
         <th>ID заказа</th>
         <th>Заказчик</th>
         <th>Получатель</th>
+        <th>Стоимость</th>
         <th>Дата получения</th>
-        <th></th>
       </tr>
     )
   }

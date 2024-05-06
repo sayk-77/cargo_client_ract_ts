@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import sprite from '../../../sprite.svg'
 import Modal from './modalConfirm'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 interface Order {
   order: {
@@ -25,9 +26,10 @@ interface Order {
     }
   }
   status: string
+  updateOrder: () => void
 }
 
-export const ElementTable: React.FC<Order> = ({ order }) => {
+export const ElementTable: React.FC<Order> = ({ order, updateOrder }) => {
   const navigate = useNavigate()
   const [showModal, setShowModal] = useState<boolean>(false)
 
@@ -35,11 +37,10 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
 
   const confirmOrder = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_API_URL}/order/complete/${order.ID}`,
-      )
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/order/complete/${order.ID}`)
       if (response.status === 200) {
-        console.log(response.data)
+        toast.success('Заказ успешно завершен!')
+        updateOrder()
       }
     } catch (er) {
       console.log(er)
@@ -96,15 +97,6 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
         <td>{order.recipient}</td>
         <td>{order.orderPrice}</td>
         <td>{order.deliveryDate}</td>
-        <td>
-          <svg
-            height={14}
-            width={8}
-            style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/create-order')}>
-            <use xlinkHref={sprite + '#arrow_detail'}></use>
-          </svg>
-        </td>
       </tr>
     )
   }
@@ -112,13 +104,7 @@ export const ElementTable: React.FC<Order> = ({ order }) => {
   return (
     <>
       {content}
-      {
-        <Modal
-          showModal={showModal}
-          onClose={() => setShowModal(false)}
-          onConfirm={confirmOrder}
-        />
-      }
+      {<Modal showModal={showModal} onClose={() => setShowModal(false)} onConfirm={confirmOrder} />}
     </>
   )
 }

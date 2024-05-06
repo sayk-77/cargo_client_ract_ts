@@ -87,7 +87,7 @@ export const Order: React.FC = () => {
               Завершенные
             </p>
           </div>
-          <TableOrder status={activeFilter} orders={currentOrders} />
+          <TableOrder status={activeFilter} orders={currentOrders} updateOrder={fetchOrders} />
         </div>
       </div>
     </div>
