@@ -16,7 +16,7 @@ export const CompletedOrder: React.FC = () => {
   const [orders, setOrders] = useState<Orders[]>([])
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('userToken')
 
     const getNewOrder = async () => {
       try {

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const Profile: React.FC = () => {
   const [activeMenuItem, setActiveMenuItem] = useState('profile')
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('userToken')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -22,10 +22,7 @@ export const Profile: React.FC = () => {
   }
   return (
     <section className={styles.profile}>
-      <ProfileDashBoard
-        activeMenuItem={activeMenuItem}
-        onMenuItemClick={handleMenuItemClick}
-      />
+      <ProfileDashBoard activeMenuItem={activeMenuItem} onMenuItemClick={handleMenuItemClick} />
       {activeMenuItem === 'profile' && <UserInfo />}
       {activeMenuItem === 'setting' && <Setting />}
       {activeMenuItem === 'order' && <Order />}

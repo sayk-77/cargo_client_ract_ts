@@ -17,25 +17,19 @@ export const UserInfo: React.FC = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const userToken = localStorage.getItem('token')
+    const userToken = localStorage.getItem('userToken')
 
     const getUserInfo = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_API_URL}/client/info`,
-          {
-            headers: { Authorization: userToken },
-          },
-        )
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/client/info`, {
+          headers: { Authorization: userToken },
+        })
 
         const data = await response.data
         setUserData(data)
       } catch (err) {
         const axiosError = err as AxiosError<any>
-        if (
-          axiosError?.response?.status === 500 &&
-          axiosError?.response?.data === 'Invalid Token'
-        ) {
+        if (axiosError?.response?.status === 500 && axiosError?.response?.data === 'Invalid Token') {
           localStorage.removeItem('token')
           navigate('/authorization')
         }

@@ -33,22 +33,12 @@ export const CompletedOrderCard: React.FC<CompletedOrderCardProps> = ({
         <p>{orderDate}</p>
         <p>{typeName}</p>
         <p>{orderPrice}</p>
-        <svg
-          className={styles.additional_svg}
-          height={22}
-          width={27}
-          onClick={handlePopupOpen}>
-          <use xlinkHref={sprite + '#detail_order'}></use>
+        <svg className={styles.additional_svg} height={22} width={27} onClick={handlePopupOpen}>
+          <use xlinkHref={sprite + '#arrow_detail'}></use>
         </svg>
       </div>
 
-      {isPopupOpen && (
-        <OrderPopup
-          show={isPopupOpen}
-          onClose={handlePopupClose}
-          orderId={orderNumber}
-        />
-      )}
+      {isPopupOpen && <OrderPopup show={isPopupOpen} onClose={handlePopupClose} orderId={orderNumber} />}
     </>
   )
 }

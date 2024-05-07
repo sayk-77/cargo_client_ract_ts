@@ -10,7 +10,7 @@ import { checkAuth } from '../../tools/checkAuth'
 interface CargoType {
   ID: number
   typeName: string
-  PriceCoeff: number
+  priceCoeff: number
 }
 
 export const CreateOrder: React.FC = () => {
@@ -52,13 +52,13 @@ export const CreateOrder: React.FC = () => {
     if (selectedType && distance !== undefined) {
       const result =
         (basePriceDelivery + weight * basePriceWeightKg + size * baseSizePrice + distance * basePriceKm) *
-        selectedType?.PriceCoeff
+        selectedType?.priceCoeff
       setTotalPrice(Math.round(result))
       setErrorPrice('')
     }
   }
 
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('userToken')
 
   const getAllCargoType = async () => {
     try {

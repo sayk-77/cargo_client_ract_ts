@@ -18,7 +18,7 @@ export const ChangePassword: React.FC = () => {
 
   const changePassword = async () => {
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('userToken')
 
       if (!isValidPassword(newPassword)) {
         setError(

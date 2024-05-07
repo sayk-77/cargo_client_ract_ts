@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './car_card.module.css'
+import sprite from '../../../sprite.svg'
+import { Modal } from './carModal'
 
 interface CarCardProps {
   car: {
@@ -8,13 +10,24 @@ interface CarCardProps {
     model: string
     year: number
     color: string
-    mileage: string
+    mileage: number
     technicalStatus: string
     imageUrl: string
   }
+  carUpdate: () => void
 }
 
-export const CarCard: React.FC<CarCardProps> = ({ car }) => {
+export const CarCard: React.FC<CarCardProps> = ({ car, carUpdate }) => {
+  const [showModal, setShowModal] = useState<boolean>(false)
+
+  const openModal = () => {
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
   return (
     <div className={styles.card_container}>
       <p className={styles.car_model}>
@@ -42,6 +55,10 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           <li>{car.technicalStatus}</li>
         </ul>
       </div>
+      <svg className={styles.edit} height={24} width={24} style={{ cursor: 'pointer' }} onClick={openModal}>
+        <use xlinkHref={sprite + '#edit'}></use>
+      </svg>
+      {showModal && <Modal car={car} isOpen={showModal} onClose={closeModal} carUpdate={carUpdate}/>}
     </div>
   )
 }

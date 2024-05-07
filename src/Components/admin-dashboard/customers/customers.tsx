@@ -18,9 +18,9 @@ export const Customers: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const itemsPerPage = 5
 
-  const getAllCustomers = async (page: number) => {
+  const getAllCustomers = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/client/all?page=${page}`)
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/client/all`)
       if (response.status === 200) {
         setCustomers(response?.data)
       }
@@ -30,8 +30,8 @@ export const Customers: React.FC = () => {
   }
 
   useEffect(() => {
-    getAllCustomers(currentPage)
-  }, [currentPage])
+    getAllCustomers()
+  }, [])
 
   const totalItems = customers.length
   const totalPages = Math.ceil(totalItems / itemsPerPage)
@@ -61,7 +61,7 @@ export const Customers: React.FC = () => {
             </thead>
             <tbody>
               {currentCustomers.map((customer) => (
-                <CustomerCard key={customer.ID} customer={customer} />
+                <CustomerCard key={customer.ID} customer={customer} updateClients={getAllCustomers} />
               ))}
             </tbody>
           </table>

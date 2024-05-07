@@ -10,6 +10,7 @@ interface Driver {
   lastName: string
   licenseNumber: string
   transportationCert: string
+  status: string
 }
 
 export const Driver: React.FC = () => {
@@ -17,17 +18,18 @@ export const Driver: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const itemsPerPage = 4
 
-  useEffect(() => {
-    const getAllDriver = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/driver/all`)
-        if (response.status === 200) {
-          setDrivers(response?.data)
-        }
-      } catch (er) {
-        console.log(er)
+  const getAllDriver = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/driver/all`)
+      if (response.status === 200) {
+        setDrivers(response?.data)
       }
+    } catch (er) {
+      console.log(er)
     }
+  }
+
+  useEffect(() => {
     getAllDriver()
   }, [])
 
@@ -58,7 +60,7 @@ export const Driver: React.FC = () => {
             </thead>
             <tbody>
               {currentDrivers.map((driver) => (
-                <DriverCard key={driver.ID} driver={driver} />
+                <DriverCard key={driver.ID} driver={driver} updateDrivers={getAllDriver} />
               ))}
             </tbody>
           </table>

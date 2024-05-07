@@ -1,17 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import sprite from '../../../sprite.svg'
+import { DriverModal } from './driverModal'
 
-interface DriverProps {
+interface DriverCardProps {
   driver: {
     ID: number
     firstName: string
     lastName: string
     licenseNumber: string
     transportationCert: string
+    status: string
   }
+  updateDrivers: () => void
 }
 
-export const DriverCard: React.FC<DriverProps> = ({ driver }) => {
+export const DriverCard: React.FC<DriverCardProps> = ({ driver, updateDrivers }) => {
+  const [showModal, setShowModal] = useState<boolean>(false)
+
+  const openModal = () => {
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
   return (
     <tr>
       <td>
@@ -20,9 +33,10 @@ export const DriverCard: React.FC<DriverProps> = ({ driver }) => {
       <td>{driver.transportationCert}</td>
       <td>{driver.licenseNumber}</td>
       <td>
-        <svg height={14} width={8} style={{ cursor: 'pointer' }}>
-          <use xlinkHref={sprite + '#arrow_detail'}></use>
+        <svg height={24} width={24} style={{ cursor: 'pointer' }} onClick={openModal}>
+          <use xlinkHref={sprite + '#edit'}></use>
         </svg>
+        {showModal && <DriverModal isOpen={showModal} onClose={closeModal} driver={driver} updateDrivers={updateDrivers}/>}
       </td>
     </tr>
   )

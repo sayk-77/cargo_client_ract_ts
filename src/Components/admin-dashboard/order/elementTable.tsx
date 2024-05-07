@@ -4,6 +4,7 @@ import sprite from '../../../sprite.svg'
 import Modal from './modalConfirm'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { ModalOrder } from './orderModal'
 
 interface Order {
   order: {
@@ -30,8 +31,16 @@ interface Order {
 }
 
 export const ElementTable: React.FC<Order> = ({ order, updateOrder }) => {
-  const navigate = useNavigate()
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [showOrderModal, setShowOrderModal] = useState<boolean>(false)
+
+  const openModal = () => {
+    setShowOrderModal(true)
+  }
+
+  const closeModal = () => {
+    setShowOrderModal(false)
+  }
 
   let content
 
@@ -57,14 +66,11 @@ export const ElementTable: React.FC<Order> = ({ order, updateOrder }) => {
         <td>{order.orderPrice} рублей</td>
         <td>{`${order.Client.firstName} ${order.Client.lastName}`}</td>
         <td>
-          <svg
-            height={14}
-            width={8}
-            style={{ cursor: 'pointer' }}
-            onClick={() => navigate(`/create-order/${order.ID}`)}>
+          <svg height={14} width={8} style={{ cursor: 'pointer' }} onClick={openModal}>
             <use xlinkHref={sprite + '#arrow_detail'}></use>
           </svg>
         </td>
+        {showOrderModal && <ModalOrder onClose={closeModal} id={order.ID} updateOrders={updateOrder} />}
       </tr>
     )
   } else if (order.status === 'В процессе') {

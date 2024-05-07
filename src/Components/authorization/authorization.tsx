@@ -26,7 +26,7 @@ export const Authorization: React.FC = () => {
       )
 
       const token: string = await response.data['token']
-      localStorage.setItem('token', token)
+      localStorage.setItem('userToken', token)
       navigate('/profile')
     } catch (err) {
       if (axios.isAxiosError(err)) {

@@ -14,7 +14,7 @@ interface Orders {
 export const NewOrder: React.FC = () => {
   const [orders, setOrders] = useState<Orders[]>()
 
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('userToken')
 
   const getNewOrder = async () => {
     try {

@@ -10,7 +10,7 @@ interface Car {
   model: string
   year: number
   color: string
-  mileage: string
+  mileage: number
   technicalStatus: string
   imageUrl: string
 }
@@ -20,17 +20,18 @@ export const CarPark: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const itemsPerPage = 4
 
-  useEffect(() => {
-    const getAllCar = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/car/all`)
-        if (response.status === 200) {
-          setCars(response?.data)
-        }
-      } catch (er) {
-        console.log(er)
+  const getAllCar = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/car/all`)
+      if (response.status === 200) {
+        setCars(response?.data)
       }
+    } catch (er) {
+      console.log(er)
     }
+  }
+
+  useEffect(() => {
     getAllCar()
   }, [])
 
@@ -52,7 +53,7 @@ export const CarPark: React.FC = () => {
       <div className={styles.car_park_content}>
         <div className={styles.car_cards}>
           {currentCars.map((car) => (
-            <CarCard key={car.ID} car={car} />
+            <CarCard key={car.ID} car={car} carUpdate={getAllCar} />
           ))}
         </div>
       </div>
