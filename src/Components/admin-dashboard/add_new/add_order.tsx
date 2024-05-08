@@ -38,9 +38,9 @@ export const AddOrder: React.FC = () => {
   const [sendAddress, setSendAddress] = useState<string>('')
   const [destAddress, setDestAddress] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
-  const [distance, setDistance] = useState<number>(0)
-  const [weight, setWeight] = useState<number>(0)
-  const [size, setSize] = useState<number>(0)
+  const [distance, setDistance] = useState<number>()
+  const [weight, setWeight] = useState<number>()
+  const [size, setSize] = useState<number>()
   const [totalPrice, setTotalPrice] = useState<number | undefined>(undefined)
 
   useEffect(() => {
@@ -50,9 +50,7 @@ export const AddOrder: React.FC = () => {
         setClients(clientsResponse.data)
         setFilteredClients(clientsResponse.data)
       }
-      const cargoTypesResponse = await axios.get(
-        `${import.meta.env.VITE_SERVER_API_URL}/cargo_type/all`,
-      )
+      const cargoTypesResponse = await axios.get(`${import.meta.env.VITE_SERVER_API_URL}/cargo_type/all`)
       if (cargoTypesResponse.status === 200) {
         setCargoTypes(cargoTypesResponse.data)
         setFilteredCargoTypes(cargoTypesResponse.data)
@@ -117,10 +115,7 @@ export const AddOrder: React.FC = () => {
       const { priceCoeff } = selectedType
       console.log(priceCoeff, weight, size, distance)
       const result =
-        (basePriceDelivery +
-          weight * basePriceWeightKg +
-          size * baseSizePrice +
-          distance * basePriceKm) *
+        (basePriceDelivery + weight * basePriceWeightKg + size * baseSizePrice + distance * basePriceKm) *
         priceCoeff
       setTotalPrice(Math.round(result))
     }
@@ -138,7 +133,7 @@ export const AddOrder: React.FC = () => {
     const data = {
       clientId: selectClient?.ID,
       cargoTypeId: selectCargo?.ID,
-      recepient: recipient,
+      recipient: recipient,
       destinationAddress: destAddress,
       sendingAddress: sendAddress,
       orderPrice: totalPrice,
@@ -204,9 +199,7 @@ export const AddOrder: React.FC = () => {
           onInputChange={(inputValue) =>
             setFilteredCargoTypes(
               cargoTypes.filter((type) =>
-                `${type.typeName} ${type.descriptionType}`
-                  .toLowerCase()
-                  .includes(inputValue.toLowerCase()),
+                `${type.typeName} ${type.descriptionType}`.toLowerCase().includes(inputValue.toLowerCase()),
               ),
             )
           }

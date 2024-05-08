@@ -1,0 +1,53 @@
+.navigation > p {
+  font-size: 24px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.content {
+  margin: 0 auto;
+}
+.statusOrder {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.statusOrder > p {
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  color: #555;
+}
+
+.statusOrder > p > span {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.statusOrder svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.money {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.money > p {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.container_charts {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
