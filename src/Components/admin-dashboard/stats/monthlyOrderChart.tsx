@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
 
 interface MonthlyOrdersChartProps {
   data: { month: string; orders: number }[]

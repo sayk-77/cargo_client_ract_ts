@@ -26,7 +26,7 @@ export const Modal: React.FC<ModalProps> = ({ onClose, car, carUpdate }) => {
   const [color, setColor] = useState(car.color)
   const [mileage, setMileage] = useState<number>(car.mileage)
   const [image, setImage] = useState<File | null>(null)
-  const [imageUrl, setImageUrl] = useState(car.imageUrl)
+  const imageUrl = car.imageUrl
   const [technicalCondition, setTechnicalCondition] = useState(car.technicalStatus)
   const technicalConditions = ['Плохое', 'Удовлетворительное', 'Хорошее', 'Отличное', 'Новое']
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from './question.module.css'
-import { Search_pagination } from '../../search_pagination/search_pagination'
 import { QuestionCard } from './questionCard'
 import axios from 'axios'
 import { Pagination } from '../../pagination/pagination'
@@ -47,9 +46,6 @@ export const QuestionsUsers: React.FC = () => {
 
   const totalItems = filterItems().length
   const totalPages = Math.ceil(totalItems / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const currentQuestions = questions.slice(startIndex, endIndex)
 
   const changePage = (selected: number) => {
     setCurrentPage(selected + 1)

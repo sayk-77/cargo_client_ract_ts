@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 
 interface Order {
   Client: {
@@ -51,7 +51,7 @@ export const ClientOrdersChart: React.FC = () => {
         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
         <XAxis dataKey="clientName" height={0} />
         <YAxis />
-        <Tooltip formatter={(value, name, props) => [`${props.payload.clientName}`, value]} />
+        <Tooltip formatter={(value, props: any) => [`${props.payload.clientName}`, value]} />
         <Bar dataKey="orderCount" fill="#8f00bf" name="Клиент" />
       </BarChart>
     </div>

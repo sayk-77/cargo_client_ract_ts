@@ -38,9 +38,9 @@ export const AddOrder: React.FC = () => {
   const [sendAddress, setSendAddress] = useState<string>('')
   const [destAddress, setDestAddress] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
-  const [distance, setDistance] = useState<number>()
-  const [weight, setWeight] = useState<number>()
-  const [size, setSize] = useState<number>()
+  const [distance, setDistance] = useState<number>(0)
+  const [weight, setWeight] = useState<number>(0)
+  const [size, setSize] = useState<number>(0)
   const [totalPrice, setTotalPrice] = useState<number | undefined>(undefined)
 
   useEffect(() => {
