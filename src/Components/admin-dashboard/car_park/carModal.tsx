@@ -26,12 +26,11 @@ export const Modal: React.FC<ModalProps> = ({ onClose, car, carUpdate }) => {
   const [color, setColor] = useState(car.color)
   const [mileage, setMileage] = useState<number>(car.mileage)
   const [image, setImage] = useState<File | null>(null)
-  const [imageUrl, setImageUrl] = useState(car.imageUrl)
   const [technicalCondition, setTechnicalCondition] = useState(car.technicalStatus)
   const technicalConditions = ['Плохое', 'Удовлетворительное', 'Хорошее', 'Отличное', 'Новое']
 
   const save = async () => {
-    let url = imageUrl
+    let url = car.imageUrl
 
     if (image) {
       const formData = new FormData()
@@ -84,7 +83,7 @@ export const Modal: React.FC<ModalProps> = ({ onClose, car, carUpdate }) => {
         </span>
         <div className={styles.image}>
           <img
-            src={`${import.meta.env.VITE_SERVER_API_URL}/${imageUrl}`}
+            src={`${import.meta.env.VITE_SERVER_API_URL}/${car.imageUrl}`}
             alt="Car"
             className={styles.modal_image}
           />

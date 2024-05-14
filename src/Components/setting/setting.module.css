@@ -1,14 +1,13 @@
 .setting {
-    display: flex;
-    margin: 0 auto;
-    gap: 20px;
+  display: flex;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 1000px) {
-    .setting {
-        display: flex;
-        justify-content: center;
-        margin: 0 auto;
-        gap: 0;
-    }
+  .setting {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 0;
+  }
 }

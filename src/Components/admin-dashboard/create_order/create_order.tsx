@@ -7,6 +7,7 @@ import axios from 'axios'
 import Select, { ValueType } from 'react-select'
 import { toast } from 'react-toastify'
 import { checkRole } from '../../../tools/checkRole'
+import ReactInputMask from 'react-input-mask'
 
 interface Order {
   ID: number
@@ -52,6 +53,11 @@ export const MakeOrder: React.FC = () => {
     }
   }, [])
 
+  const isValidDate = (dateString: string) => {
+    const regex = /^(0[1-9]|1[0-2])\.(0[1-9]|[12][0-9]|3[01])\.\d{4}$/
+    return regex.test(dateString)
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,8 +70,14 @@ export const MakeOrder: React.FC = () => {
         if (driversResponse.status === 200) {
           setDrivers(driversResponse.data)
         }
-      } catch (error) {
-        console.error('Error fetching data:', error)
+      } catch (error: any) {
+        if (error.response && error.response.status === 404) {
+          toast.error('Данный заказ уже завершен!')
+          navigate('/dashboard')
+        } else {
+          console.error('Error:', error)
+          toast.error('Произошла ошибка на стороне сервера')
+        }
       }
     }
 
@@ -89,7 +101,16 @@ export const MakeOrder: React.FC = () => {
     singleValue: (defaultStyles: any) => ({ ...defaultStyles, color: '#000' }),
   }
 
-  const sendOrder = async () => {
+  const sendOrder = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!isValidDate(deliveryDate) || !isValidDate(sendDate) || !isValidDate(arriveDate)) {
+      toast.error('Пожалуйста, введите корректные даты в формате мм.дд.гггг')
+      return
+    }
+
+    return
+
     const data = {
       id: order?.ID,
       deliveryDate: deliveryDate,
@@ -116,7 +137,7 @@ export const MakeOrder: React.FC = () => {
 
   return (
     <div className={styles.make_order}>
-      <div className={styles.make_order_container}>
+      <form className={styles.make_order_container} onSubmit={sendOrder}>
         <div className={styles.top_order}>
           <p>ID заказа - {order?.ID}</p>
           <p>Дата создания - {order?.orderDate}</p>
@@ -154,6 +175,7 @@ export const MakeOrder: React.FC = () => {
               onChange={(option) => setSelectedDriver(option)}
               noOptionsMessage={() => 'Ничего не найдено'}
               placeholder="Выберите водителя"
+              required
             />
           </div>
           <div className={styles.order_info_block_item}>
@@ -173,11 +195,13 @@ export const MakeOrder: React.FC = () => {
         <div className={styles.order_info_block}>
           <div className={styles.order_info_block_item}>
             <p>Дата доставки</p>
-            <input
+            <ReactInputMask
+              mask="99.99.9999"
+              value={deliveryDate}
               className={styles.input_order}
+              placeholder="мм.дд.гггг"
               onChange={(e) => setDeliveryDate(e.target.value)}
-              type="text"
-              placeholder="07.01.2024"
+              required
             />
           </div>
           <div className={styles.order_info_block_item}>
@@ -188,20 +212,24 @@ export const MakeOrder: React.FC = () => {
         <div className={styles.order_info_block}>
           <div className={styles.order_info_block_item}>
             <p>Дата отправления</p>
-            <input
+            <ReactInputMask
+              mask="99.99.9999"
+              value={sendDate}
               className={styles.input_order}
-              type="text"
+              placeholder="мм.дд.гггг"
               onChange={(e) => setSendDate(e.target.value)}
-              placeholder="02.01.2024"
+              required
             />
           </div>
           <div className={styles.order_info_block_item}>
             <p>Дата прибытия</p>
-            <input
+            <ReactInputMask
+              mask="99.99.9999"
+              value={arriveDate}
               className={styles.input_order}
+              placeholder="мм.дд.гггг"
               onChange={(e) => setArriveSend(e.target.value)}
-              type="text"
-              placeholder="07.01.2024"
+              required
             />
           </div>
         </div>
@@ -209,13 +237,13 @@ export const MakeOrder: React.FC = () => {
           <button className={styles.make_cancel} onClick={() => navigate('/dashboard')}>
             Отмена
           </button>
-          <button className={styles.make_ok} onClick={sendOrder}>
+          <button className={styles.make_ok} type="submit">
             <svg height={13} width={18}>
               <use xlinkHref={`${sprite}#ok`}></use>
             </svg>
           </button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

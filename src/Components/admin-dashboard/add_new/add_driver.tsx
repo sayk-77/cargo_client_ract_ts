@@ -159,6 +159,7 @@ export const AddDriver: React.FC = () => {
           onChange={(option) => setSelectedCar(option)}
           noOptionsMessage={() => 'Свободных авто нет'}
           placeholder="Выберите авто"
+          required
         />
       </div>
       <button type="submit" className={styles.submitButton}>

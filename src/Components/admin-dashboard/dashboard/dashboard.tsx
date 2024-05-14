@@ -9,6 +9,7 @@ import { MakeOrder } from '../create_order/create_order'
 import { QuestionsUsers } from '../questions/questions'
 import { AddNew } from '../add_new/add_new'
 import { Stats } from '../stats/stats'
+import { CargoType } from '../cargo_type/cargo_type'
 
 export const Dashboard: React.FC = () => {
   const [activeMenuItem, setActiveMenuItem] = useState('order')
@@ -27,6 +28,7 @@ export const Dashboard: React.FC = () => {
       {activeMenuItem === 'questions' && <QuestionsUsers />}
       {activeMenuItem === 'addNew' && <AddNew />}
       {activeMenuItem === 'stats' && <Stats />}
+      {activeMenuItem === 'cargo-type' && <CargoType />}
     </div>
   )
 }

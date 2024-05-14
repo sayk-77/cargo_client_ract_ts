@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import sprite from '../../../sprite.svg'
 import Modal from './modalConfirm'
 import axios from 'axios'

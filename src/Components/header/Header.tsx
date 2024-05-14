@@ -5,7 +5,7 @@ import { BurgerMenu } from './Burger'
 import { Link } from 'react-router-dom'
 
 export const Header: React.FC = () => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('userToken')
 
   return (
     <>

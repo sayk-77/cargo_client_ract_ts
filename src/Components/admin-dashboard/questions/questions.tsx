@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from './question.module.css'
-import { Search_pagination } from '../../search_pagination/search_pagination'
 import { QuestionCard } from './questionCard'
 import axios from 'axios'
 import { Pagination } from '../../pagination/pagination'
@@ -37,19 +36,20 @@ export const QuestionsUsers: React.FC = () => {
   const filterItems = () => {
     switch (filter) {
       case 'Новый':
-        return questions.filter((questions) => questions.status === 'Новый')
+        return questions.filter((question) => question.status === 'Новый')
       case 'Обработан':
-        return questions.filter((questions) => questions.status === 'Обработан')
+        return questions.filter((question) => question.status === 'Обработан')
       default:
         return questions
     }
   }
 
-  const totalItems = filterItems().length
+  const filteredQuestions = filterItems()
+  const totalItems = filteredQuestions.length
   const totalPages = Math.ceil(totalItems / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const currentQuestions = questions.slice(startIndex, endIndex)
+  const currentQuestions = filteredQuestions.slice(startIndex, endIndex)
 
   const changePage = (selected: number) => {
     setCurrentPage(selected + 1)
@@ -57,10 +57,10 @@ export const QuestionsUsers: React.FC = () => {
 
   return (
     <div className={styles.question_content}>
-      {totalPages >= 2 && (
-        <Pagination pageChange={changePage} pageCount={totalPages} currentPage={currentPage} />
-      )}
       <div className={styles.table_question}>
+        {totalPages >= 2 && (
+          <Pagination pageCount={totalPages} currentPage={currentPage} pageChange={changePage} />
+        )}
         <div className={styles.filter}>
           <p className={filter === 'Новый' ? styles.activeFilter : ''} onClick={() => setFilter('Новый')}>
             Новые
@@ -81,7 +81,7 @@ export const QuestionsUsers: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {filterItems().map((question) => (
+            {currentQuestions.map((question) => (
               <QuestionCard key={question.ID} quest={question} />
             ))}
           </tbody>

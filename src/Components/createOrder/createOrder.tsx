@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { formatDateToYYYYMMDD } from '../../tools/formatDate'
 import { BurgerDashBoard } from '../profile/burgerDashBoard'
 import { checkAuth } from '../../tools/checkAuth'
+import { toast } from 'react-toastify'
 
 interface CargoType {
   ID: number
@@ -28,6 +29,7 @@ export const CreateOrder: React.FC = () => {
   const navigate = useNavigate()
 
   const calculatePrice = async (): Promise<void> => {
+    toast.info('Рассчитываем стоимость заказа...')
     const arrayAddress: string[] = [deliveryAddress, pickupAddress]
 
     try {
@@ -39,7 +41,7 @@ export const CreateOrder: React.FC = () => {
       setDistance(result)
       setErrorAddress('')
     } catch (error: any) {
-      console.error('Ошибка при выполнении геокодирования:', error.message)
+      toast.error('Произошла ошибка! Попробуйте позже')
     }
 
     const basePriceDelivery: number = 1000
@@ -98,17 +100,23 @@ export const CreateOrder: React.FC = () => {
       createOrder: formatDateToYYYYMMDD(new Date()),
     }
 
+    toast.info('Создание заказа...')
+
     const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/order/add`, orderData, {
       headers: { Authorization: token },
     })
 
     if (response.status == 200) {
+      toast.success('Заказ создан, ожидайте подстверждения')
       navigate('/profile')
     }
   }
 
   return (
     <div className={styles.container}>
+      <p className={styles.back} onClick={() => navigate('/profile')}>
+        Вернуться в профиль
+      </p>
       <h1>Оформление заказа</h1>
       <form onSubmit={createOrder} className={styles.formOrder}>
         <label className={styles.orderLabel}>

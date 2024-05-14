@@ -64,7 +64,7 @@ export const Order: React.FC = () => {
 
   return (
     <div className={styles.order_container}>
-      {totalPages > 2 && (
+      {totalPages >= 2 && (
         <Pagination pageCount={totalPages} currentPage={currentPage} pageChange={changePage} />
       )}
 

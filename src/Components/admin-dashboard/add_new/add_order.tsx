@@ -38,9 +38,9 @@ export const AddOrder: React.FC = () => {
   const [sendAddress, setSendAddress] = useState<string>('')
   const [destAddress, setDestAddress] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
-  const [distance, setDistance] = useState<number>()
-  const [weight, setWeight] = useState<number>()
-  const [size, setSize] = useState<number>()
+  const [distance, setDistance] = useState<number>(0)
+  const [weight, setWeight] = useState<number>(0)
+  const [size, setSize] = useState<number>(0)
   const [totalPrice, setTotalPrice] = useState<number | undefined>(undefined)
 
   useEffect(() => {
@@ -113,7 +113,6 @@ export const AddOrder: React.FC = () => {
 
     if (selectedType && distance !== undefined) {
       const { priceCoeff } = selectedType
-      console.log(priceCoeff, weight, size, distance)
       const result =
         (basePriceDelivery + weight * basePriceWeightKg + size * baseSizePrice + distance * basePriceKm) *
         priceCoeff
@@ -176,6 +175,7 @@ export const AddOrder: React.FC = () => {
           type="text"
           value={sendAddress}
           className={styles.inputField}
+          placeholder="Великий Новгород, ул. Большая Санкт-Петербургская, д.1"
           onChange={(e) => setSendAddress(e.target.value)}
           required
         />
@@ -184,6 +184,7 @@ export const AddOrder: React.FC = () => {
           type="text"
           value={destAddress}
           className={styles.inputField}
+          placeholder="Великий Новгород, ул. Большая Санкт-Петербургская, д.9"
           onChange={(e) => setDestAddress(e.target.value)}
           required
         />
@@ -210,17 +211,17 @@ export const AddOrder: React.FC = () => {
         <label className={styles.inputLabel}>Размер груза:</label>
         <input
           type="number"
-          value={size}
+          value={size === 0 ? '' : size}
           className={styles.inputField}
-          onChange={(e) => setSize(Number(e.target.value))}
+          onChange={(e) => setSize(e.target.value === '' ? 0 : Number(e.target.value))}
           required
         />
         <label className={styles.inputLabel}>Вес груза:</label>
         <input
           type="number"
-          value={weight}
+          value={weight === 0 ? '' : weight}
           className={styles.inputField}
-          onChange={(e) => setWeight(Number(e.target.value))}
+          onChange={(e) => setWeight(e.target.value === '' ? 0 : Number(e.target.value))}
           required
         />
         <label className={styles.inputLabel}>Получатель</label>

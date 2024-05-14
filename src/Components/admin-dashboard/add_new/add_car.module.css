@@ -74,3 +74,20 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
+.textArea {
+  resize: none;
+  min-width: 324px;
+  min-height: 100px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.textArea:focus {
+  outline: none;
+  border: 1px solid #0bd366;
+}

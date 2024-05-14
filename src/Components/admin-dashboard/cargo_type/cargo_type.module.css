@@ -1,0 +1,40 @@
+.cargo_container {
+  display: flex;
+  margin: 0 auto;
+}
+
+.table_cargo {
+  margin: 20px auto;
+}
+
+.table_cargo table {
+  border: 1px solid #aeaeae;
+  border-radius: 10px;
+  padding: 50px;
+  width: 900px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+}
+
+.table_cargo th,
+.table_cargo td {
+  padding: 8px;
+  text-align: center;
+  font-size: 13px;
+  color: #7d7d7d;
+}
+
+.table_cargo th {
+  font-weight: bold;
+  color: #7d7d7d;
+  font-size: 14px;
+  padding-bottom: 50px;
+}
+
+.cargo_type_card td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

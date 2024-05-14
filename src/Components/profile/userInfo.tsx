@@ -42,7 +42,6 @@ export const UserInfo: React.FC = () => {
   return (
     <section className={styles.userInfo}>
       <h3>Личная информация</h3>
-      <img src="/assets/user_avatar_100px.png" alt="" />
       <div className={styles.info_blocks}>
         <div className={styles.info_block}>
           <p>Имя</p>

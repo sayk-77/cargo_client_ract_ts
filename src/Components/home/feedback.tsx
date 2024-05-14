@@ -3,6 +3,7 @@ import styles from './feedback.module.css'
 import { useResize } from '../../hooks/useResize'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import ReactInputMask from 'react-input-mask'
 
 export const Feedback: React.FC = () => {
   const [name, setName] = useState<string>('')
@@ -14,6 +15,15 @@ export const Feedback: React.FC = () => {
 
   const sendFeedback = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (phone.replace(/[^0-9]/g, '').length !== 11) {
+      toast.error('Пожалуйста, укажите полный номер телефона')
+      return
+    }
+    if (question.length < 20) {
+      toast.error('Вопрос должен быть не менее 20 символов')
+      return
+    }
     const data = {
       name: name,
       numberPhone: phone,
@@ -46,14 +56,17 @@ export const Feedback: React.FC = () => {
           id="name"
           placeholder="Имя"
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <label>Ваш номер телефона:</label>
-        <input
-          type="tel"
-          id="phone"
+        <ReactInputMask
+          className={styles.input}
+          mask="+7 (999) 999 99 99"
           value={phone}
-          placeholder="+7-123-456-78-90"
-          onChange={(e) => setPhone(e.target.value)}
+          maskChar=" "
+          placeholder="+7 (---) --- -- --"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+          required
         />
         <label>Ваша почта:</label>
         <input
@@ -62,6 +75,7 @@ export const Feedback: React.FC = () => {
           value={email}
           placeholder="email@email.ru"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <label>Ваш вопрос:</label>
         <textarea
@@ -69,6 +83,7 @@ export const Feedback: React.FC = () => {
           value={question}
           placeholder="Вопрос"
           onChange={(e) => setQuestion(e.target.value)}
+          required
         />
         <button className={styles.form_submit} type="submit">
           Отправить вопрос

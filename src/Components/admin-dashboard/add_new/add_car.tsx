@@ -48,6 +48,7 @@ export const AddCar: React.FC = () => {
           const response = await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/car/add`, data)
           if (response.status === 200) {
             toast.success('Машина добавлена')
+            resetForm()
           }
         } catch (error) {
           console.error(error)
@@ -83,30 +84,62 @@ export const AddCar: React.FC = () => {
     singleValue: (defaultStyles: any) => ({ ...defaultStyles, color: '#000' }),
   }
 
+  const resetForm = () => {
+    setBrand('')
+    setModel('')
+    setColor('')
+    setYear(0)
+    setMileage(0)
+    setSelectedFile(null)
+    setSelectedTechnicalCondition('Плохое')
+  }
+
   return (
     <form className={styles.formContainer} onSubmit={addCar}>
       <div className={styles.inputContainer}>
         <label className={styles.inputLabel}>Бренд:</label>
-        <input type="text" className={styles.inputField} onChange={(e) => setBrand(e.target.value)} />
+        <input
+          type="text"
+          className={styles.inputField}
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+          required
+        />
 
         <label className={styles.inputLabel}>Модель:</label>
-        <input type="text" className={styles.inputField} onChange={(e) => setModel(e.target.value)} />
+        <input
+          type="text"
+          className={styles.inputField}
+          value={model}
+          onChange={(e) => setModel(e.target.value)}
+          required
+        />
 
         <label className={styles.inputLabel}>Цвет:</label>
-        <input type="text" className={styles.inputField} onChange={(e) => setColor(e.target.value)} />
+        <input
+          type="text"
+          className={styles.inputField}
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+          required
+        />
 
         <label className={styles.inputLabel}>Пробег:</label>
         <input
           type="number"
           className={styles.inputField}
+          value={mileage === 0 ? '' : mileage}
           onChange={(e) => setMileage(Number(e.target.value))}
+          required
         />
 
         <label className={styles.inputLabel}>Год выпуска:</label>
         <input
           type="number"
           className={styles.inputField}
+          value={year === 0 ? '' : year}
           onChange={(e) => setYear(Number(e.target.value))}
+          required
         />
 
         <label className={styles.inputLabel}>Техническое состояние:</label>
@@ -120,6 +153,7 @@ export const AddCar: React.FC = () => {
           onChange={(option) => setSelectedTechnicalCondition(option?.value)}
           noOptionsMessage={() => 'Состояний не найдено'}
           placeholder="Выберите состояние"
+          required
         />
 
         <label className={styles.inputLabel}>Картинка:</label>

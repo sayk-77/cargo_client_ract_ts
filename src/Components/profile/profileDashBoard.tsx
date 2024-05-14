@@ -9,10 +9,7 @@ interface ProfileDashBoardProps {
   onMenuItemClick: (menuItem: string) => void
 }
 
-export const ProfileDashBoard: React.FC<ProfileDashBoardProps> = ({
-  activeMenuItem,
-  onMenuItemClick,
-}) => {
+export const ProfileDashBoard: React.FC<ProfileDashBoardProps> = ({ activeMenuItem, onMenuItemClick }) => {
   const handleClick = (menuItem: string) => {
     onMenuItemClick(menuItem)
   }

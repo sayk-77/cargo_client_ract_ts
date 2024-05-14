@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import styles from './popup.module.css'
+import { toast } from 'react-toastify'
 
 interface OrderPopupProps {
   show: boolean
@@ -22,20 +23,13 @@ interface Order {
   }
 }
 
-export const OrderPopup: React.FC<OrderPopupProps> = ({
-  show,
-  onClose,
-  orderId,
-  onDeleteSuccess,
-}) => {
+export const OrderPopup: React.FC<OrderPopupProps> = ({ show, onClose, orderId, onDeleteSuccess }) => {
   const [order, setOrder] = useState<Order | null>(null)
 
   useEffect(() => {
     const getOrderById = async () => {
       try {
-        const response = await axios.get<Order>(
-          `${import.meta.env.VITE_SERVER_API_URL}/order/${orderId}`,
-        )
+        const response = await axios.get<Order>(`${import.meta.env.VITE_SERVER_API_URL}/order/${orderId}`)
         setOrder(response.data)
       } catch (error) {
         console.error('Error fetching order:', error)
@@ -57,9 +51,11 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({
       const response: AxiosResponse = await axios.delete(
         `${import.meta.env.VITE_SERVER_API_URL}/order/delete/${orderId}`,
       )
-      console.log(response.data)
-      onDeleteSuccess && onDeleteSuccess()
-      closePopup()
+      if (response.status === 200) {
+        toast.success('Заказ успешно отменен')
+        onDeleteSuccess && onDeleteSuccess()
+        closePopup()
+      }
     } catch (error: any) {
       console.error(error.response.data.error)
     }
@@ -67,9 +63,7 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({
 
   return (
     <section className={styles.popup} onClick={closePopup}>
-      <article
-        className={styles['popup-content']}
-        onClick={(e) => e.stopPropagation()}>
+      <article className={styles['popup-content']} onClick={(e) => e.stopPropagation()}>
         <span className={styles.close} onClick={closePopup}>
           &times;
         </span>
@@ -102,9 +96,7 @@ export const OrderPopup: React.FC<OrderPopupProps> = ({
             <strong>Цена доставки:</strong> {order?.orderPrice} ₽
           </p>
           {order.status === 'Создан' ? (
-            <button
-              onClick={() => deleteOrder(orderId)}
-              className={styles.buttonDelete}>
+            <button onClick={() => deleteOrder(orderId)} className={styles.buttonDelete}>
               Отменить
             </button>
           ) : null}
