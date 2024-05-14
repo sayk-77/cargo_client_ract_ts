@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { Home } from './Components/home/home'
 import { Contacts } from './Components/contacts/contacts'
 import { Question } from './Components/question/question'
@@ -18,7 +18,7 @@ import { Setting } from './Components/setting/setting'
 
 export const Router: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -38,6 +38,6 @@ export const Router: React.FC = () => {
         <Route path="/solution-quest/:id" element={<QuestionDetail />} />
         <Route path="/recovery" element={<Recovery />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

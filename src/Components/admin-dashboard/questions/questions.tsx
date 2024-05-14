@@ -49,7 +49,7 @@ export const QuestionsUsers: React.FC = () => {
   const totalPages = Math.ceil(totalItems / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const currentQuestions = filteredQuestions.slice(startIndex, endIndex)
+  const currentQuestions = questions.slice(startIndex, endIndex)
 
   const changePage = (selected: number) => {
     setCurrentPage(selected + 1)
